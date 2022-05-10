@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import '../pages/tabs/tabs.dart';
-
-// import '../pages/Search.dart';
+import '../pages/search.dart';
 
 //配置路由
 final routes = {
   '/': (context) => Tabs(),
-  // '/search': (context) => SearchPage(),
+  '/search': (context) => SearchPage(),
 };
 
 //固定写法
