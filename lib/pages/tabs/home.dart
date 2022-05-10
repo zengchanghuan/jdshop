@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/widgets.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jdshop/services/screen_adaper.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -56,6 +56,38 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _hotProductListWidget() {
+    return Container(
+      height: 240,
+      padding: EdgeInsets.all(10.0),
+      width: double.infinity,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              Container(
+                height: 140,
+                width: 140,
+                margin: EdgeInsets.only(right: 4.0),
+                child: Image.network(
+                    "https://www.itying.com/images/flutter/hot${index + 1}.jpg",
+                    fit: BoxFit.cover),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 5.0),
+                height: 44.0,
+                child: Text("第${index}条"),
+              ),
+
+            ],
+          );
+        },
+        itemCount: 10,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -63,10 +95,10 @@ class _HomePageState extends State<HomePage> {
         _swiperWidget(),
         SizedBox(height: 20.0),
         _titleWidget('猜你喜欢'),
+        // SizedBox(height: 20.0),
+        _hotProductListWidget(),
         SizedBox(height: 20.0),
         _titleWidget('热门推荐'),
-
-
       ],
     );
   }
