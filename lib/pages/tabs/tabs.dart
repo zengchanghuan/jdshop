@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
+import 'cart.dart';
+import 'category.dart';
+import 'user.dart';
 
 class Tabs extends StatefulWidget {
   const Tabs({Key? key}) : super(key: key);
@@ -10,6 +14,12 @@ class Tabs extends StatefulWidget {
 class _TabsState extends State<Tabs> {
 
   int _currentIndex = 0;
+  List _pageList = [
+    HomePage(),
+    CategoryPage(),
+    CartPage(),
+    UserPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +27,7 @@ class _TabsState extends State<Tabs> {
       appBar: AppBar(
         title: Text('jd shop'),
       ),
-      body: Text('首页'),
+      body: _pageList[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
