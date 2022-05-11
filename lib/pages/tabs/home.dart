@@ -5,6 +5,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/widgets.dart';
 import '../../model/focus_model.dart';
 import 'package:jdshop/services/screen_adaper.dart';
+import '../../config/config.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _getFocusData() async {
-    var api = 'http://jdmall.itying.com/api/focus';
+    var api = '${Config.domain}api/focus';
     var result = await Dio().get(api);
 
     var foucsList = FocusModel.fromJson(result.data);
@@ -45,8 +46,10 @@ class _HomePageState extends State<HomePage> {
         child: Swiper(
             itemBuilder: (BuildContext context, int index) {
               String pic = _focusData[index].pic;
+              pic = Config.domain + pic.replaceAll('\\', '/');
+
               return new Image.network(
-                "https://jdmall.itying.com/${pic.replaceAll('\\', '/')}",
+                "${pic}",
                 fit: BoxFit.fill,
               );
             },
