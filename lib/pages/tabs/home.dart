@@ -141,27 +141,28 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  //推荐商品
   Widget _recProductListWidget() {
-    final itemWidth = MediaQuery.of(context).size.width;
+
+    final width = MediaQuery.of(context).size.width;
+    var itemWidth = (width - 10 - 10 - 10) / 2;
     return Container(
       padding: const EdgeInsets.all(10),
       child: Wrap(
         runSpacing: 10,
         spacing: 10,
         children: _bestProductList.map((value) {
+
           //图片
-          String sPic = value.sPic;
-          sPic = Config.domain + sPic.replaceAll('\\', '/');
+          String sPic=value.sPic;
+          sPic=Config.domain+sPic.replaceAll('\\', '/');
 
           return Container(
             padding: const EdgeInsets.all(10),
             width: itemWidth,
             decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color.fromRGBO(233, 233, 233, 0.9),
-                width: 1,
-              ),
-            ),
+                border: Border.all(
+                    color: const Color.fromRGBO(233, 233, 233, 0.9), width: 1)),
             child: Column(
               children: <Widget>[
                 SizedBox(
@@ -214,70 +215,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  /*
-  Widget _recProductItemWidget() {
-    final width = MediaQuery.of(context).size.width;
-    var itemWidth = (width - 10 - 10 - 10) / 2;
-    return Container(
-      padding: const EdgeInsets.all(10),
-      width: itemWidth,
-      decoration: BoxDecoration(
-          border: Border.all(
-        color: const Color.fromRGBO(233, 233, 233, 0.9),
-        width: 1.0,
-      )),
-      child: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: AspectRatio(
-              aspectRatio: 1 / 1,
-              child: Image.network(
-                  'https://www.itying.com/images/flutter/list1.jpg',
-                  fit: BoxFit.cover),
-            ),
-          ),
-          const Padding(
-            child: Text(
-              '2022夏季新款气质高贵洋气阔太太有女人味中长款宽松大码',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Colors.black54,
-              ),
-            ),
-            padding: EdgeInsets.only(top: 10),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Stack(
-              children: const [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    '¥180',
-                    style: TextStyle(color: Colors.red, fontSize: 16),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    '¥220',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 14,
-                      decoration: TextDecoration.lineThrough,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-  */
 
   @override
   Widget build(BuildContext context) {
