@@ -1,34 +1,32 @@
 // FocusModel.fromJson(json);
 class FocusModel {
-  List<FocusItemModel> result = [];
-
+  List<FocusItemModel> result=[];
   FocusModel({required this.result});
-
   FocusModel.fromJson(Map<String, dynamic> json) {
     if (json['result'] != null) {
-      result = [];
       json['result'].forEach((v) {
-        result.add(FocusItemModel.fromJson(v));
+        result.add( FocusItemModel.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['result'] = result.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.result != null) {
+      data['result'] = this.result.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
 
 class FocusItemModel {
-  String sId = "";
-  String title = "";
-  String status = "";
-  String pic = "";
-  String url = "";
+  String? sId;  //可空类型
+  String? title;
+  String? status;
+  String? pic;
+  String? url;
 
-  FocusItemModel({required this.sId,required this.title, required this.status,required this.pic,required this.url});
-
+  FocusItemModel({this.sId, this.title, this.status, this.pic, this.url});
   FocusItemModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     title = json['title'];

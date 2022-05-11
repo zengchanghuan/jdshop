@@ -25,11 +25,15 @@ class _HomePageState extends State<HomePage> {
     var result = await Dio().get(api);
 
     var foucsList = FocusModel.fromJson(result.data);
-    print(foucsList.result);
 
-    setState(() {
-      _foucsData = foucsList.result;
+    foucsList.result.forEach((element) {
+      print(element.title);
+      print(element.pic);
     });
+
+    // setState(() {
+    //   _foucsData = foucsList.result;
+    // });
   }
   //轮播图
   Widget _swiperWidget() {
