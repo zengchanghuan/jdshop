@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/widgets.dart';
+import '../../model/focus_model.dart';
 import 'package:jdshop/services/screen_adaper.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,6 +13,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void initState() {
+    super.initState();
+
+    /*
+    var strData='{"name":"张三","age":20}';
+
+    var result = json.decode(strData);
+
+    print(result["age"]);
+    print(result["name"]);
+
+    */
+
+    var str =
+        '{"_id":"59f6ef443ce1fb0fb02c7a43","title":"笔记本电脑 ","status":"1"," url":"12" }';
+
+    var focus = FocusModel.fromJson(jsonDecode(str));
+    print(focus.sId);
+
+    print(focus.title);
+
+  }
+
   //轮播图
   Widget _swiperWidget() {
     List<Map> imgList = [
@@ -44,9 +69,9 @@ class _HomePageState extends State<HomePage> {
       decoration: BoxDecoration(
           border: Border(
               left: BorderSide(
-                color: Colors.red,
-                width: 10.0,
-              ))),
+        color: Colors.red,
+        width: 10.0,
+      ))),
       child: Text(
         value,
         style: TextStyle(
@@ -88,25 +113,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _recProductItemWidget() {
-    final width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final width = MediaQuery.of(context).size.width;
     var itemWidth = (width - 10 - 10 - 10) / 2;
     return Container(
       padding: EdgeInsets.all(10),
       width: itemWidth,
       decoration: BoxDecoration(
           border: Border.all(
-            color: Color.fromRGBO(233, 233, 233, 0.9),
-            width: 1.0,
-          )),
+        color: Color.fromRGBO(233, 233, 233, 0.9),
+        width: 1.0,
+      )),
       child: Column(
         children: [
           Container(
             width: double.infinity,
             child: AspectRatio(
-              aspectRatio: 1/1,
+              aspectRatio: 1 / 1,
               child: Image.network(
                   'https://www.itying.com/images/flutter/list1.jpg',
                   fit: BoxFit.cover),
@@ -127,30 +149,29 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.only(top: 10),
             child: Stack(
               children: [
-              Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '¥180',
-                style: TextStyle(color: Colors.red, fontSize: 16),
-              ),
-            ),
-            Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  '¥220',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 14,
-                    decoration: TextDecoration.lineThrough,
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '¥180',
+                    style: TextStyle(color: Colors.red, fontSize: 16),
                   ),
                 ),
-
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    '¥220',
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 14,
+                      decoration: TextDecoration.lineThrough,
+                    ),
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),
-    )],
-    )
-    ,
     );
   }
 
