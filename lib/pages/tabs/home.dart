@@ -44,9 +44,9 @@ class _HomePageState extends State<HomePage> {
       decoration: BoxDecoration(
           border: Border(
               left: BorderSide(
-        color: Colors.red,
-        width: 10.0,
-      ))),
+                color: Colors.red,
+                width: 10.0,
+              ))),
       child: Text(
         value,
         style: TextStyle(
@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget _hotProductListWidget() {
     return Container(
-      height: 240,
-      padding: EdgeInsets.all(10.0),
+      height: 200,
+      padding: EdgeInsets.all(5.0),
       width: double.infinity,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -79,12 +79,78 @@ class _HomePageState extends State<HomePage> {
                 height: 44.0,
                 child: Text("第${index}条"),
               ),
-
             ],
           );
         },
         itemCount: 10,
       ),
+    );
+  }
+
+  Widget _recProductItemWidget() {
+    final width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    var itemWidth = (width - 10 - 10 - 10) / 2;
+    return Container(
+      padding: EdgeInsets.all(10),
+      width: itemWidth,
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: Color.fromRGBO(233, 233, 233, 0.9),
+            width: 1.0,
+          )),
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            child: AspectRatio(
+              aspectRatio: 1/1,
+              child: Image.network(
+                  'https://www.itying.com/images/flutter/list1.jpg',
+                  fit: BoxFit.cover),
+            ),
+          ),
+          Padding(
+            child: Text(
+              '2022夏季新款气质高贵洋气阔太太有女人味中长款宽松大码',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.black54,
+              ),
+            ),
+            padding: EdgeInsets.only(top: 10),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: Stack(
+              children: [
+              Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '¥180',
+                style: TextStyle(color: Colors.red, fontSize: 16),
+              ),
+            ),
+            Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  '¥220',
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 14,
+                    decoration: TextDecoration.lineThrough,
+                  ),
+                ),
+
+          )
+        ],
+      ),
+    )],
+    )
+    ,
     );
   }
 
@@ -95,10 +161,25 @@ class _HomePageState extends State<HomePage> {
         _swiperWidget(),
         SizedBox(height: 20.0),
         _titleWidget('猜你喜欢'),
-        // SizedBox(height: 20.0),
-        _hotProductListWidget(),
         SizedBox(height: 20.0),
+        _hotProductListWidget(),
         _titleWidget('热门推荐'),
+        Container(
+          padding: EdgeInsets.all(10.0),
+          child: Wrap(
+            runSpacing: 10.0,
+            spacing: 10,
+            children: [
+              _recProductItemWidget(),
+              _recProductItemWidget(),
+              _recProductItemWidget(),
+              _recProductItemWidget(),
+              _recProductItemWidget(),
+              _recProductItemWidget(),
+              _recProductItemWidget(),
+            ],
+          ),
+        )
       ],
     );
   }
