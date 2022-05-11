@@ -8,12 +8,22 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
+  int _selectIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    //左侧宽度
+    var leftWidth = width / 4;
+    //右侧每一项宽度=（总宽度-左侧宽度-GridView外侧元素左右的Padding值-GridView中间的间距）/3
+
+    var rightItemWidth = (width - leftWidth - 20 - 20) / 3;
+    var rightItemHeight = rightItemWidth + 28;
+
     return Row(
       children: [
         Container(
-          width: 140,
+          width: leftWidth,
           height: double.infinity,
           color: Colors.white54,
           child: ListView.builder(
@@ -22,17 +32,22 @@ class _CategoryPageState extends State<CategoryPage> {
               return Column(
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      setState(() {
+                        _selectIndex = index;
+                      });
+                    },
                     child: Container(
                       height: 56,
                       width: double.infinity,
                       child: Text(
-                        '第${index}',
+                        '第$index',
                         textAlign: TextAlign.center,
                       ),
+                      color: _selectIndex == index ? Colors.red : Colors.white,
                     ),
                   ),
-                  Divider(),
+                  const Divider(),
                 ],
               );
             },
@@ -42,8 +57,35 @@ class _CategoryPageState extends State<CategoryPage> {
           flex: 1,
           child: Container(
             height: double.infinity,
-            color: Colors.blue,
-            child: const Text('右侧'),
+            color: const Color.fromRGBO(240, 246, 246, 0.9),
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: rightItemWidth / rightItemHeight,
+
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10),
+              itemCount: 28,
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: <Widget>[
+                      AspectRatio(
+                        aspectRatio: 1 / 1,
+                        child: Image.network(
+                            "https://www.itying.com/images/flutter/list8.jpg",
+                            fit: BoxFit.cover),
+                      ),
+                      const SizedBox(
+                        height: 28,
+                        child: Text("女装"),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ],
