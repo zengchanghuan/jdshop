@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/widgets.dart';
@@ -13,29 +14,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List _foucsData = [];
   void initState() {
     super.initState();
-
-    /*
-    var strData='{"name":"张三","age":20}';
-
-    var result = json.decode(strData);
-
-    print(result["age"]);
-    print(result["name"]);
-
-    */
-
-    var str =
-        '{"_id":"59f6ef443ce1fb0fb02c7a43","title":"笔记本电脑 ","status":"1"," url":"12" }';
-
-    var focus = FocusModel.fromJson(jsonDecode(str));
-    print(focus.sId);
-
-    print(focus.title);
-
+    _getFocusData();
   }
 
+  _getFocusData() async{
+    var api = 'http://jdmall.itying.com/api/focus';
+    var result = await Dio().get(api);
+
+    var foucsList = FocusModel.fromJson(result.data);
+    print(foucsList.result);
+
+    setState(() {
+      _foucsData = foucsList.result;
+    });
+  }
   //轮播图
   Widget _swiperWidget() {
     List<Map> imgList = [
