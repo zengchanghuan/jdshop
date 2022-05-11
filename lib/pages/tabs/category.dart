@@ -110,10 +110,9 @@ class _CategoryPageState extends State<CategoryPage> {
 
               return Column(
                 children: <Widget>[
-
                   AspectRatio(
-                    aspectRatio: 1/1,
-                    child: Image.network(pic,fit: BoxFit.cover),
+                    aspectRatio: 1 / 1,
+                    child: Image.network(pic, fit: BoxFit.cover),
                   ),
                   SizedBox(
                     height: 28,
@@ -139,10 +138,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final width = MediaQuery.of(context).size.width;
     //左侧宽度
     var leftWidth = width / 4;
     //右侧每一项宽度=（总宽度-左侧宽度-GridView外侧元素左右的Padding值-GridView中间的间距）/3

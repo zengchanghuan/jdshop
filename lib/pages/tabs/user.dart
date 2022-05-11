@@ -9,8 +9,14 @@ class UserPage extends StatefulWidget {
 
 class _UserPageState extends State<UserPage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('user');
+  }
+  @override
   Widget build(BuildContext context) {
-    return Text('UserPage');
+    return const Text('UserPage');
   }
 }
 

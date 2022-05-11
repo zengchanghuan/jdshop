@@ -11,9 +11,9 @@ class FocusModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.result != null) {
-      data['result'] = this.result.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (result.isNotEmpty) {
+      data['result'] = result.map((v) => v.toJson()).toList();
     }
     return data;
   }

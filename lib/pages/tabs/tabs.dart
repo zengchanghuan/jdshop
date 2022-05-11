@@ -12,33 +12,35 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
-
   int _currentIndex = 1;
-  List _pageList = [
-    HomePage(),
-    CategoryPage(),
-    CartPage(),
-    UserPage(),
+  final List<Widget> _pageList = [
+    const HomePage(),
+    const CategoryPage(),
+    const CartPage(),
+    const UserPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('jd shop'),
+        title: const Text('jd shop'),
       ),
-      body: _pageList[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pageList,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.red,
         // backgroundColor: Colors.grey,
-        onTap:(index){
+        onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: '首页',
