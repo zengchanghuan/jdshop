@@ -12,7 +12,17 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
+
+  PageController? _pageController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _pageController = PageController(initialPage: _currentIndex);
+  }
+
   final List<Widget> _pageList = [
     const HomePage(),
     const CategoryPage(),
@@ -24,10 +34,10 @@ class _TabsState extends State<Tabs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('jd shop'),
+        title: const Text('沃智家Demo'),
       ),
-      body: IndexedStack(
-        index: _currentIndex,
+      body: PageView(
+        controller: _pageController,
         children: _pageList,
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -38,6 +48,7 @@ class _TabsState extends State<Tabs> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
+            _pageController?.jumpToPage(_currentIndex);
           });
         },
         items: const [
