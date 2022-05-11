@@ -56,6 +56,7 @@ class _CategoryPageState extends State<CategoryPage> {
         Expanded(
           flex: 1,
           child: Container(
+            padding: const EdgeInsets.all(10.0),
             height: double.infinity,
             color: const Color.fromRGBO(240, 246, 246, 0.9),
             child: GridView.builder(
@@ -67,22 +68,19 @@ class _CategoryPageState extends State<CategoryPage> {
                   mainAxisSpacing: 10),
               itemCount: 28,
               itemBuilder: (context, index) {
-                return Container(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    children: <Widget>[
-                      AspectRatio(
-                        aspectRatio: 1 / 1,
-                        child: Image.network(
-                            "https://www.itying.com/images/flutter/list8.jpg",
-                            fit: BoxFit.cover),
-                      ),
-                      const SizedBox(
-                        height: 28,
-                        child: Text("女装"),
-                      )
-                    ],
-                  ),
+                return Column(
+                  children: <Widget>[
+                    AspectRatio(
+                      aspectRatio: 1 / 1,
+                      child: Image.network(
+                          "https://www.itying.com/images/flutter/list8.jpg",
+                          fit: BoxFit.cover),
+                    ),
+                    const SizedBox(
+                      height: 28,
+                      child: Text("女装"),
+                    )
+                  ],
                 );
               },
             ),
