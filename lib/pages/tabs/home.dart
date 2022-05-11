@@ -49,22 +49,20 @@ class _HomePageState extends State<HomePage> {
   //轮播图
   Widget _swiperWidget() {
     if (_focusData.isNotEmpty) {
-      return Container(
-        child: AspectRatio(
-          aspectRatio: 2 / 1,
-          child: Swiper(
-              itemBuilder: (BuildContext context, int index) {
-                String pic = _focusData[index].pic;
-                pic = Config.domain + pic.replaceAll('\\', '/');
-                return Image.network(
-                  pic,
-                  fit: BoxFit.fill,
-                );
-              },
-              itemCount: _focusData.length,
-              pagination: const SwiperPagination(),
-              autoplay: true),
-        ),
+      return AspectRatio(
+        aspectRatio: 2 / 1,
+        child: Swiper(
+            itemBuilder: (BuildContext context, int index) {
+              String pic = _focusData[index].pic;
+              pic = Config.domain + pic.replaceAll('\\', '/');
+              return Image.network(
+                pic,
+                fit: BoxFit.fill,
+              );
+            },
+            itemCount: _focusData.length,
+            pagination: const SwiperPagination(),
+            autoplay: true),
       );
     } else {
       return const Text('加载中...');
