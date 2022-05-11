@@ -14,50 +14,53 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List _foucsData = [];
+  List _focusData = [];
+
   void initState() {
     super.initState();
     _getFocusData();
   }
 
-  _getFocusData() async{
+  _getFocusData() async {
     var api = 'http://jdmall.itying.com/api/focus';
     var result = await Dio().get(api);
 
     var foucsList = FocusModel.fromJson(result.data);
 
-    foucsList.result.forEach((element) {
-      print(element.title);
-      print(element.pic);
-    });
-
-    // setState(() {
-    //   _foucsData = foucsList.result;
+    // foucsList.result.forEach((value) {
+    //   print(value.title);
+    //   print(value.pic);
     // });
+
+    setState(() {
+      _focusData = foucsList.result;
+    });
   }
+
   //轮播图
   Widget _swiperWidget() {
-    List<Map> imgList = [
-      {"url": "https://www.itying.com/images/flutter/slide01.jpg"},
-      {"url": "https://www.itying.com/images/flutter/slide02.jpg"},
-      {"url": "https://www.itying.com/images/flutter/slide03.jpg"},
-    ];
-
     return Container(
       child: AspectRatio(
         aspectRatio: 2 / 1,
         child: Swiper(
             itemBuilder: (BuildContext context, int index) {
-              return Image.network(
-                imgList[index]["url"],
+              String pic = _focusData[index].pic;
+              return new Image.network(
+                "https://jdmall.itying.com/${pic.replaceAll('\\', '/')}",
                 fit: BoxFit.fill,
               );
             },
-            itemCount: imgList.length,
+            itemCount: _focusData.length,
             pagination: SwiperPagination(),
             autoplay: true),
       ),
     );
+
+    // List<Map> imgList = [
+    //   {"url": "https://www.itying.com/images/flutter/slide01.jpg"},
+    //   {"url": "https://www.itying.com/images/flutter/slide02.jpg"},
+    //   {"url": "https://www.itying.com/images/flutter/slide03.jpg"},
+    // ];
   }
 
   Widget _titleWidget(value) {
