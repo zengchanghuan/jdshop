@@ -111,17 +111,24 @@ class _CategoryPageState extends State<CategoryPage> with AutomaticKeepAliveClie
               String pic = _rightCateList[index].pic;
               pic = Config.domain + pic.replaceAll('\\', '/');
 
-              return Column(
-                children: <Widget>[
-                  AspectRatio(
-                    aspectRatio: 1 / 1,
-                    child: Image.network(pic, fit: BoxFit.cover),
-                  ),
-                  SizedBox(
-                    height: 28,
-                    child: Text("${_rightCateList[index].title}"),
-                  )
-                ],
+              return InkWell(
+                onTap: (){
+                  Navigator.pushNamed(context, '/productList',arguments: {
+                    'cid':_rightCateList[index].sId
+                  });
+                },
+                child: Column(
+                  children: <Widget>[
+                    AspectRatio(
+                      aspectRatio: 1 / 1,
+                      child: Image.network(pic, fit: BoxFit.cover),
+                    ),
+                    SizedBox(
+                      height: 28,
+                      child: Text("${_rightCateList[index].title}"),
+                    )
+                  ],
+                ),
               );
             },
           ),
