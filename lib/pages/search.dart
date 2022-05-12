@@ -12,9 +12,9 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('search'),
+        title: const Text('search'),
       ),
-      body: Text('搜索'),
+      body: const Text('搜索'),
     );
   }
 }
