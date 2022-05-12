@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProductListPage extends StatefulWidget {
   Map? arguments; //Map? 表示arguments是可为空参数
 
@@ -10,7 +10,7 @@ class ProductListPage extends StatefulWidget {
 }
 
 class _ProductListPageState extends State<ProductListPage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 //商品列表
   Widget _productListWidget() {
@@ -49,6 +49,7 @@ class _ProductListPageState extends State<ProductListPage> {
                             children: <Widget>[
                               Container(
                                 height: 36,
+
                                 margin: const EdgeInsets.only(right: 10),
                                 padding:
                                     const EdgeInsets.fromLTRB(10, 0, 10, 0),
