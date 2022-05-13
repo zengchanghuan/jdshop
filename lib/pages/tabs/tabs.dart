@@ -33,12 +33,52 @@ class _TabsState extends State<Tabs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('沃智家Demo'),
-      ),
-      body: PageView(
+        appBar: _currentIndex!=3?AppBar(
+          leading: const IconButton(
+            icon: Icon(Icons.center_focus_weak, size: 28, color: Colors.black87),
+            onPressed: null,
+          ),
+          title: InkWell(
+            child: Container(
+              height: 48,
+              decoration: BoxDecoration(
+                  color: const Color.fromRGBO(233, 233, 233, 0.8),
+                  borderRadius: BorderRadius.circular(30)
+              ),
+              padding: const EdgeInsets.only(left: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const <Widget>[
+                  Icon(Icons.search),
+                  Text("笔记本",style: TextStyle(
+                      fontSize: 20
+                  ))
+                ],
+              ),
+            ),
+            onTap: (){
+              Navigator.pushNamed(context, '/search');
+
+            },
+          ),
+          actions: const <Widget>[
+            IconButton(
+              icon: Icon(Icons.message, size: 28, color: Colors.black87),
+              onPressed: null,
+            )
+          ],
+        ):AppBar(
+          title: const Text("用户中心"),
+        ),
+      body:  PageView(
         controller: _pageController,
         children: _pageList,
+        onPageChanged: (index){
+          setState(() {
+            _currentIndex=index;
+          });
+        },
+        // physics: NeverScrollableScrollPhysics(),  //禁止pageView滑动，不配置默认可以滑动
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
