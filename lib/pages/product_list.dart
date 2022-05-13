@@ -35,6 +35,23 @@ class _ProductListPageState extends State<ProductListPage> {
   //是否有数据
   bool _hasMore = true;
 
+  final List _subHeaderList = [
+    {
+      "id": 1,
+      "title": "综合",
+      "fileds": "all",
+      "sort":
+          -1, //排序     升序：price_1     {price:1}        降序：price_-1   {price:-1}
+    },
+    {"id": 2, "title": "销量", "fileds": 'salecount', "sort": -1},
+    {"id": 3, "title": "价格", "fileds": 'price', "sort": -1},
+    {"id": 4, "title": "筛选"}
+  ];
+
+  int _selectHeaderId = 1;
+
+
+
   @override
   void initState() {
     super.initState();
@@ -58,7 +75,6 @@ class _ProductListPageState extends State<ProductListPage> {
 
   //获取商品列表的数据
   _getProductListData() async {
-
     setState(() {
       _flag = false;
     });
@@ -194,6 +210,46 @@ class _ProductListPageState extends State<ProductListPage> {
     }
   }
 
+  //导航改变的时候触发
+  _subHeaderChange(id) {
+    if (id == 4) {
+      _scaffoldKey.currentState!.openEndDrawer();
+      setState(() {
+        _selectHeaderId = id;
+      });
+    } else {
+      setState(() {
+        _selectHeaderId = id;
+        _sort =
+        "${_subHeaderList[id - 1]["fileds"]}_${_subHeaderList[id - 1]["sort"]}";
+
+        //重置分页
+        _page = 1;
+        //重置数据
+        _productList = [];
+        //改变sort排序
+        _subHeaderList[id - 1]['sort'] =
+            _subHeaderList[id - 1]['sort'] * -1;
+        //回到顶部
+        _scrollController.jumpTo(0);
+        //重置_hasMore
+        _hasMore = true;
+        //重新请求
+        _getProductListData();
+      });
+    }
+  }
+  //显示header Icon
+  Widget _showIcon(id){
+    if(id==2|| id ==3){
+      if(_subHeaderList[id-1]["sort"]==1){
+        return const Icon(Icons.arrow_drop_down);
+      }
+      return const Icon(Icons.arrow_drop_up);
+    }
+    return Text("");
+  }
+
   //筛选导航
   Widget _subHeaderWidget() {
     final width = MediaQuery.of(context).size.width;
@@ -210,57 +266,34 @@ class _ProductListPageState extends State<ProductListPage> {
                 bottom: BorderSide(
                     width: 1, color: Color.fromRGBO(233, 233, 233, 0.9)))),
         child: Row(
-          children: <Widget>[
-            Expanded(
+          children: _subHeaderList.map((value) {
+            return Expanded(
               flex: 1,
               child: InkWell(
-                child: const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
-                  child: Text(
-                    "综合",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.red),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                      0, 16, 0, 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "${value["title"]}",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: (_selectHeaderId == value["id"])
+                                ? Colors.red
+                                : Colors.black54),
+                      ),
+                      _showIcon(value["id"])
+                    ],
                   ),
                 ),
-                onTap: () {},
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: InkWell(
-                child: const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
-                  child: Text("销量", textAlign: TextAlign.center),
-                ),
-                onTap: () {},
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: InkWell(
-                child: const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
-                  child: Text("价格", textAlign: TextAlign.center),
-                ),
-                onTap: () {},
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: InkWell(
-                child: const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
-                  child: Text("筛选", textAlign: TextAlign.center),
-                ),
                 onTap: () {
-                  //注意：新版本中ScaffoldState? 为可空类型 注意判断
-                  if (_scaffoldKey.currentState != null) {
-                    _scaffoldKey.currentState!.openEndDrawer();
-                  }
+                  _subHeaderChange(value["id"]);
                 },
               ),
-            ),
-          ],
+            );
+          }).toList(),
         ),
       ),
     );
