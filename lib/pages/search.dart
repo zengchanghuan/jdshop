@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import '../services/search_services.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -9,6 +11,108 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   String? _keywords;
+  List _historyListData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getHistoryData();
+  }
+
+  _getHistoryData() async {
+    var _historyListData = await SearchServices.getHistoryList();
+    setState(() {
+      this._historyListData = _historyListData;
+    });
+  }
+
+  _showAlertDialog(keywords) async {
+    var result = await showDialog(
+        barrierDismissible: false, //表示点击灰色背景的时候是否消失弹出框
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("提示信息!"),
+            content: const Text("您确定要删除吗?"),
+            actions: <Widget>[
+              TextButton(
+                child: const Text("取消"),
+                onPressed: () {
+                  if (kDebugMode) {
+                    print("取消");
+                  }
+                  Navigator.pop(context, 'Cancle');
+                },
+              ),
+              TextButton(
+                child: const Text("确定"),
+                onPressed: () async {
+                  //注意异步 删除本地记录
+                  await SearchServices.removeHistoryData(keywords);
+                  _getHistoryData();
+                  Navigator.pop(context, "Ok");
+                },
+              )
+            ],
+          );
+        });
+    //  print(result);
+  }
+
+  Widget _historyListWidget() {
+    if (_historyListData.isNotEmpty) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("历史记录", style: Theme.of(context).textTheme.subtitle1),
+          const Divider(),
+          Column(
+            children: _historyListData.map((value) {
+              return Column(
+                children: <Widget>[
+                  ListTile(
+                    title: Text("$value"),
+                    onLongPress: () {
+                      _showAlertDialog("$value");
+                    },
+                  ),
+                  const Divider()
+                ],
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 100),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              InkWell(
+                onTap: () {
+                  SearchServices.clearHistoryList();
+                  _getHistoryData();
+                },
+                child: Container(
+                  width: 380,
+                  height: 64,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black45, width: 1)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      Text("清空历史记录"),
+                      Icon(Icons.delete),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ],
+      );
+    } else {
+      return const Text("");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +125,7 @@ class _SearchPageState extends State<SearchPage> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none)),
-              onChanged: (value){
+              onChanged: (value) {
                 _keywords = value;
               },
             ),
@@ -40,9 +144,10 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
               onTap: () {
-                Navigator.pushReplacementNamed(context, '/productList',arguments: {
-                  "keywords":_keywords
-                });
+                //保存本地存储
+                SearchServices.setHistoryData(_keywords);
+                Navigator.pushReplacementNamed(context, '/productList',
+                    arguments: {"keywords": _keywords});
               },
             )
           ],
@@ -114,52 +219,7 @@ class _SearchPageState extends State<SearchPage> {
                 ],
               ),
               const SizedBox(height: 10),
-              Text("历史记录", style: Theme.of(context).textTheme.subtitle1),
-              const Divider(),
-              Column(
-                children: const <Widget>[
-                  ListTile(
-                    title: Text("女装"),
-                  ),
-                  Divider(),
-                  ListTile(
-                    title: Text("女装"),
-                  ),
-                  Divider(),
-                  ListTile(
-                    title: Text("男装"),
-                  ),
-                  Divider(),
-                  ListTile(
-                    title: Text("手机"),
-                  ),
-                  Divider(),
-                  ListTile(
-                    title: Text("鞋子"),
-                  ),
-                  Divider(),
-                ],
-              ),
-              const SizedBox(height: 100),
-              InkWell(
-                onTap: () {
-                  Navigator.pushReplacementNamed(context, '/productList',
-                      arguments: {"keywords": _keywords});
-                },
-                child: Container(
-                  width: 400,
-                  height: 64,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black45, width: 1)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Icon(Icons.delete),
-                      Text("清空历史记录")
-                    ],
-                  ),
-                ),
-              )
+              _historyListWidget()
             ],
           ),
         ));
