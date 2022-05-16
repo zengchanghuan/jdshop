@@ -6,15 +6,15 @@ class CateModel {
   CateModel.fromJson(Map<String, dynamic> json) {
     if (json['result'] != null) {
       json['result'].forEach((v) {
-        result.add(new CateItemModel.fromJson(v));
+        result.add(CateItemModel.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.result.length > 0) {
-      data['result'] = this.result.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (result.isNotEmpty) {
+      data['result'] = result.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -41,13 +41,13 @@ class CateItemModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['title'] = this.title;
-    data['status'] = this.status;
-    data['pic'] = this.pic;
-    data['pid'] = this.pid;
-    data['sort'] = this.sort;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['title'] = title;
+    data['status'] = status;
+    data['pic'] = pic;
+    data['pid'] = pid;
+    data['sort'] = sort;
     return data;
   }
 }

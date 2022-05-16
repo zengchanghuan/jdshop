@@ -1,5 +1,5 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../services/ScreenAdapter.dart';
 
 import 'ProductContent/ProductContentFirst.dart';
@@ -9,7 +9,7 @@ import '../widget/JdButton.dart';
 
 class ProductContentPage extends StatefulWidget {
   final Map arguments;
-  ProductContentPage({Key? key, required this.arguments}) : super(key: key);
+  const ProductContentPage({Key? key, required this.arguments}) : super(key: key);
 
   _ProductContentPageState createState() => _ProductContentPageState();
 }
@@ -24,9 +24,9 @@ class _ProductContentPageState extends State<ProductContentPage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
+              SizedBox(
                 width: ScreenAdapter.width(400),
-                child: TabBar(
+                child: const TabBar(
                   indicatorColor: Colors.red,
                   indicatorSize: TabBarIndicatorSize.label,
                   tabs: <Widget>[
@@ -48,7 +48,7 @@ class _ProductContentPageState extends State<ProductContentPage> {
           actions: <Widget>[
 
             IconButton(
-              icon: Icon(Icons.more_horiz),
+              icon: const Icon(Icons.more_horiz),
               onPressed: (){
                 showMenu(
                     context:context,
@@ -56,7 +56,7 @@ class _ProductContentPageState extends State<ProductContentPage> {
                     items: [
                         PopupMenuItem(
                           child: Row(
-                            children: <Widget>[
+                            children: const <Widget>[
                               Icon(Icons.home),
                               Text("首页")
                             ],
@@ -64,7 +64,7 @@ class _ProductContentPageState extends State<ProductContentPage> {
                         ),
                         PopupMenuItem(
                           child: Row(
-                            children: <Widget>[
+                            children: const <Widget>[
                               Icon(Icons.search),
                               Text("搜索")
                             ],
@@ -81,7 +81,7 @@ class _ProductContentPageState extends State<ProductContentPage> {
 
           children: <Widget>[
 
-            TabBarView(
+            const TabBarView(
                 children: <Widget>[
                   ProductContentFirst(),
                   ProductContentSecond(),
@@ -93,7 +93,7 @@ class _ProductContentPageState extends State<ProductContentPage> {
                height: ScreenAdapter.width(88), //注意：里面元素的总高度不能大于外部元素的高度
                bottom: 0,
                child: Container(               
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     top: BorderSide(
                       color: Colors.black26,
@@ -119,7 +119,7 @@ class _ProductContentPageState extends State<ProductContentPage> {
                     Expanded(
                       flex: 1,
                       child: JdButton(
-                        color:Color.fromRGBO(253, 1, 0, 0.9),
+                        color:const Color.fromRGBO(253, 1, 0, 0.9),
                         text: "加入购物车",
                         cb: (){
                           print('加入购物车');
@@ -129,10 +129,12 @@ class _ProductContentPageState extends State<ProductContentPage> {
                     Expanded(
                       flex: 1,
                       child: JdButton(
-                        color: Color.fromRGBO(255, 165, 0, 0.9),
+                        color: const Color.fromRGBO(255, 165, 0, 0.9),
                         text: "立即购买",
                         cb: (){
-                          print('立即购买');
+                          if (kDebugMode) {
+                            print('立即购买');
+                          }
                         },
                       ),
                     )

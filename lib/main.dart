@@ -7,6 +7,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
 
+  @override
   _MyAppState createState() => _MyAppState();
 }
 
@@ -14,7 +15,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: Size(750, 1334),    //配置设计稿的宽度高度        
+        designSize: const Size(750, 1334),    //配置设计稿的宽度高度
         builder: () => MaterialApp(
             debugShowCheckedModeBanner: false,
             initialRoute: '/',

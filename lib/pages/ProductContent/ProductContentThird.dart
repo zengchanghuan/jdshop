@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProductContentThird extends StatefulWidget {
-  ProductContentThird({Key? key}) : super(key: key);
+  const ProductContentThird({Key? key}) : super(key: key);
 
   _ProductContentThirdState createState() => _ProductContentThirdState();
 }
@@ -9,16 +9,14 @@ class ProductContentThird extends StatefulWidget {
 class _ProductContentThirdState extends State<ProductContentThird> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: ListView.builder(
-         itemCount: 30,
-         itemBuilder: (context,index){
-           return ListTile(
-             title: Text("第${index}条"),
-           );
+    return ListView.builder(
+      itemCount: 30,
+      itemBuilder: (context,index){
+        return ListTile(
+          title: Text("第$index条"),
+        );
 
-         },
-       )
+      },
     );
   }
 }
