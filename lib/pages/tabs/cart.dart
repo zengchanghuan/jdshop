@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({Key? key}) : super(key: key);
+  CartPage({Key? key}) : super(key: key);
 
-  @override
-  State<CartPage> createState() => _CartPageState();
+  _CartPageState createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
+
   @override
-  void initState() {
-    // TODO: implement initState
+  void initState() { 
     super.initState();
-    print('cart');
+    print("Cart init");
   }
   @override
   Widget build(BuildContext context) {
-    return Text('cartpage');
+    return Text("购物车页面");
   }
 }
