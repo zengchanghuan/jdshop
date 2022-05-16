@@ -6,11 +6,11 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Center(
       child: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[      
+          children: const <Widget>[
             CircularProgressIndicator(
               strokeWidth: 1.0,
             ),Text(
