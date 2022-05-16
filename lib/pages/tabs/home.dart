@@ -15,9 +15,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
-
-
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   List _focusData = [];
   List _hotProductList = [];
   List _bestProductList = [];
@@ -149,7 +148,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   //推荐商品
   Widget _recProductListWidget() {
-
     final width = MediaQuery.of(context).size.width;
     var itemWidth = (width - 10 - 10 - 10) / 2;
     return Container(
@@ -158,69 +156,75 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
         runSpacing: 10,
         spacing: 10,
         children: _bestProductList.map((value) {
-
           //图片
-          String sPic=value.sPic;
-          sPic=Config.domain+sPic.replaceAll('\\', '/');
+          String sPic = value.sPic;
+          sPic = Config.domain + sPic.replaceAll('\\', '/');
 
-          return Container(
-            padding: const EdgeInsets.all(10),
-            width: itemWidth,
-            decoration: BoxDecoration(
-                border: Border.all(
-                    color: const Color.fromRGBO(233, 233, 233, 0.9), width: 1)),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  width: double.infinity,
-                  child: AspectRatio(
-                    //防止服务器返回的图片大小不一致导致高度不一致问题
-                    aspectRatio: 1 / 1,
-                    child: Image.network(
-                      sPic,
-                      fit: BoxFit.cover,
+          return InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, '/productContent',
+                  arguments: {"id": value.sId});
+            },
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              width: itemWidth,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: const Color.fromRGBO(233, 233, 233, 0.9),
+                      width: 1)),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    width: double.infinity,
+                    child: AspectRatio(
+                      //防止服务器返回的图片大小不一致导致高度不一致问题
+                      aspectRatio: 1 / 1,
+                      child: Image.network(
+                        sPic,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Text(
-                    "${value.title}",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.black54),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Text(
+                      "${value.title}",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.black54),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Stack(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "¥${value.price}",
-                          style: const TextStyle(color: Colors.red, fontSize: 16),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Text( "¥${value.oldPrice}",
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Stack(
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "¥${value.price}",
                             style: const TextStyle(
-                                color: Colors.black54,
-                                fontSize: 14,
-                                decoration: TextDecoration.lineThrough)),
-                      )
-                    ],
-                  ),
-                )
-              ],
+                                color: Colors.red, fontSize: 16),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text("¥${value.oldPrice}",
+                              style: const TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                  decoration: TextDecoration.lineThrough)),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         }).toList(),
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -236,6 +240,4 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
       ],
     );
   }
-
-
 }
