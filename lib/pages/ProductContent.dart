@@ -1,20 +1,46 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:jdshop/model/product_content_model.dart';
 import '../services/ScreenAdapter.dart';
-
+import '../config/Config.dart';
 import 'ProductContent/ProductContentFirst.dart';
 import 'ProductContent/ProductContentSecond.dart';
 import 'ProductContent/ProductContentThird.dart';
 import '../widget/JdButton.dart';
-
+import '../widget/LoadingWidget.dart';
 class ProductContentPage extends StatefulWidget {
   final Map arguments;
-  const ProductContentPage({Key? key, required this.arguments}) : super(key: key);
 
+  const ProductContentPage({Key? key, required this.arguments})
+      : super(key: key);
+
+  @override
   _ProductContentPageState createState() => _ProductContentPageState();
 }
 
 class _ProductContentPageState extends State<ProductContentPage> {
+  final List _productContentList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getContentData();
+  }
+
+  _getContentData() async {
+    var api = '${Config.domain}api/pcontent?id=${widget.arguments['id']}';
+    if (kDebugMode) {
+      print(api);
+    }
+    var result = await Dio().get(api);
+    var productContent = ProductContentModel.fromJson(result.data);
+
+    setState(() {
+      _productContentList.add(productContent.result);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -44,75 +70,74 @@ class _ProductContentPageState extends State<ProductContentPage> {
               )
             ],
           ),
-        
           actions: <Widget>[
-
             IconButton(
               icon: const Icon(Icons.more_horiz),
-              onPressed: (){
+              onPressed: () {
                 showMenu(
-                    context:context,
-                    position:RelativeRect.fromLTRB(ScreenAdapter.width(600), 76, 10, 0) ,
+                    context: context,
+                    position: RelativeRect.fromLTRB(
+                        ScreenAdapter.width(600), 76, 10, 0),
                     items: [
-                        PopupMenuItem(
-                          child: Row(
-                            children: const <Widget>[
-                              Icon(Icons.home),
-                              Text("首页")
-                            ],
-                          ),
+                      PopupMenuItem(
+                        child: Row(
+                          children: const <Widget>[
+                            Icon(Icons.home),
+                            Text("首页")
+                          ],
                         ),
-                        PopupMenuItem(
-                          child: Row(
-                            children: const <Widget>[
-                              Icon(Icons.search),
-                              Text("搜索")
-                            ],
-                          ),
-                        )
-                    ]
-                );
+                      ),
+                      PopupMenuItem(
+                        child: Row(
+                          children: const <Widget>[
+                            Icon(Icons.search),
+                            Text("搜索")
+                          ],
+                        ),
+                      )
+                    ]);
               },
             )
-
           ],
         ),
-        body: Stack(
+        body: _productContentList.isNotEmpty?Stack(
 
           children: <Widget>[
 
-            const TabBarView(
-                children: <Widget>[
-                  ProductContentFirst(),
-                  ProductContentSecond(),
-                  ProductContentThird()
-                ],
-             ),
-             Positioned(
-               width: ScreenAdapter.width(750),
-               height: ScreenAdapter.width(88), //注意：里面元素的总高度不能大于外部元素的高度
-               bottom: 0,
-               child: Container(               
+            TabBarView(
+              children: <Widget>[
+                ProductContentFirst(_productContentList),
+                ProductContentSecond(_productContentList),
+                ProductContentThird()
+              ],
+            ),
+            Positioned(
+              width: ScreenAdapter.width(750),
+              height: ScreenAdapter.width(88),
+              bottom: 20,
+              child: Container(
                 decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      color: Colors.black26,
-                      width: 1
-                    )
-                  ),
-                  color: Colors.white
+                    border: Border(
+                        top: BorderSide(
+                            color: Colors.black26,
+                            width: 1
+                        )
+                    ),
+                    color: Colors.white
                 ),
                 child: Row(
                   children: <Widget>[
 
                     Container(
-                      padding: EdgeInsets.only(top:ScreenAdapter.height(8)),
+                      padding: EdgeInsets.only(top:ScreenAdapter.height(10)),
                       width: 100,
-                      height: ScreenAdapter.height(80),
+                      height: ScreenAdapter.height(88),
                       child: Column(
                         children: <Widget>[
-                          Icon(Icons.shopping_cart,size:ScreenAdapter.size(38)),
-                          Text("购物车",style: TextStyle(fontSize:ScreenAdapter.size(24)))
+                          Icon(Icons.shopping_cart,size: ScreenAdapter.size(38)),
+                          Text("购物车",style: TextStyle(
+                              fontSize: ScreenAdapter.size(24)
+                          ))
                         ],
                       ),
                     ),
@@ -122,7 +147,9 @@ class _ProductContentPageState extends State<ProductContentPage> {
                         color:const Color.fromRGBO(253, 1, 0, 0.9),
                         text: "加入购物车",
                         cb: (){
-                          print('加入购物车');
+                          if (kDebugMode) {
+                            print('加入购物车');
+                          }
                         },
                       ),
                     ),
@@ -141,10 +168,10 @@ class _ProductContentPageState extends State<ProductContentPage> {
 
                   ],
                 ),
-               ),
-             )
+              ),
+            )
           ],
-        ),
+        ):const LoadingWidget(),
       ),
     );
   }
