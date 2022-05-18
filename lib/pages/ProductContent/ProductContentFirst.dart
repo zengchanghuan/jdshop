@@ -15,9 +15,12 @@ class ProductContentFirst extends StatefulWidget {
   _ProductContentFirstState createState() => _ProductContentFirstState();
 }
 
-class _ProductContentFirstState extends State<ProductContentFirst> {
+class _ProductContentFirstState extends State<ProductContentFirst> with AutomaticKeepAliveClientMixin{
   late ProductContentItem _productContent;
   List _attr = [];
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -134,6 +137,7 @@ class _ProductContentFirstState extends State<ProductContentFirst> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     //处理图片
     String pic = Config.domain + _productContent.pic;
     pic = pic.replaceAll('\\', '/');
