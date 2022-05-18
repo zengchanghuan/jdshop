@@ -38,7 +38,6 @@ class _ProductContentFirstState extends State<ProductContentFirst>
   _initAttr() {
     var attr = _attr;
     for (var i = 0; i < attr.length; i++) {
-
       print(attr[0].attrList);
       print(attr[0].cate);
       print(attr[0].list);
