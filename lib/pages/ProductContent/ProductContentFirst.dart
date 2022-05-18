@@ -33,7 +33,7 @@ class _ProductContentFirstState extends State<ProductContentFirst> with Automati
     _productContent = widget._productContentList[0];
     _attr = _productContent.attr;
 
-    // _initAttr();
+    _initAttr();
 
 
     actionEventBus=eventBus.on<ProductContentEvent>().listen((str) {
@@ -81,14 +81,14 @@ class _ProductContentFirstState extends State<ProductContentFirst> with Automati
     }
     setBottomState(() {
       //注意  改变showModalBottomSheet里面的数据 来源于StatefulBuilder
-      this._attr = attr;
+      _attr = attr;
     });
     _getSelectedAttrValue();
   }
 
   //获取选中的值
   _getSelectedAttrValue() {
-    var _list = this._attr;
+    var _list = _attr;
     List tempArr = [];
     for (var i = 0; i < _list.length; i++) {
       for (var j = 0; j < _list[i].attrList.length; j++) {
