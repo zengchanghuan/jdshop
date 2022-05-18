@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class Counter with ChangeNotifier, DiagnosticableTreeMixin {
+class CountNotifier with ChangeNotifier, DiagnosticableTreeMixin {
   int _count = 1; //状态
 
   int get count => _count; //获取状态

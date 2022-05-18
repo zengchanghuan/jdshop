@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
         builder: () => MultiProvider(
               providers: 
               [
-                ChangeNotifierProvider(create: (_) => Counter()),
+                ChangeNotifierProvider(create: (_) => CountNotifier()),
               ],
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
