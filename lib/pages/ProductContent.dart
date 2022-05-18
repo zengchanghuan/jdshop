@@ -9,6 +9,8 @@ import 'ProductContent/ProductContentSecond.dart';
 import 'ProductContent/ProductContentThird.dart';
 import '../widget/JdButton.dart';
 import '../widget/LoadingWidget.dart';
+import '../services/event_bus.dart';
+
 class ProductContentPage extends StatefulWidget {
   final Map arguments;
 
@@ -105,6 +107,7 @@ class _ProductContentPageState extends State<ProductContentPage> {
           children: <Widget>[
 
             TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
               children: <Widget>[
                 ProductContentFirst(_productContentList),
                 ProductContentSecond(_productContentList),
@@ -147,6 +150,8 @@ class _ProductContentPageState extends State<ProductContentPage> {
                         color:const Color.fromRGBO(253, 1, 0, 0.9),
                         text: "加入购物车",
                         cb: (){
+                          //广播
+                          eventBus.fire(ProductContentEvent('加入购物车'));
                           if (kDebugMode) {
                             print('加入购物车');
                           }
@@ -159,6 +164,8 @@ class _ProductContentPageState extends State<ProductContentPage> {
                         color: const Color.fromRGBO(255, 165, 0, 0.9),
                         text: "立即购买",
                         cb: (){
+                          //广播
+                          eventBus.fire(ProductContentEvent('立即购买'));
                           if (kDebugMode) {
                             print('立即购买');
                           }

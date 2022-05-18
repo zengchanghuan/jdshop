@@ -13,7 +13,7 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
-  int _currentIndex = 2;
+  int _currentIndex = 0;
   late PageController _pageController;
 
   @override
@@ -23,8 +23,8 @@ class _TabsState extends State<Tabs> {
   }
 
   final List<Widget> _pageList = [
-    HomePage(),
-    CategoryPage(),
+    const HomePage(),
+    const CategoryPage(),
     const CartPage(),
     const UserPage()
   ];
