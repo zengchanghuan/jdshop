@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 
 class ProductContentThird extends StatefulWidget {
-  const ProductContentThird({Key? key}) : super(key: key);
+  ProductContentThird({Key? key}) : super(key: key);
 
   _ProductContentThirdState createState() => _ProductContentThirdState();
 }
 
-class _ProductContentThirdState extends State<ProductContentThird> {
+class _ProductContentThirdState extends State<ProductContentThird>  with AutomaticKeepAliveClientMixin{
+  
+  bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 30,
-      itemBuilder: (context,index){
-        return ListTile(
-          title: Text("第$index条"),
-        );
+    return Container(
+       child: ListView.builder(
+         itemCount: 30,
+         itemBuilder: (context,index){
+           return ListTile(
+             title: Text("第${index}条"),
+           );
 
-      },
+         },
+       )
     );
   }
 }

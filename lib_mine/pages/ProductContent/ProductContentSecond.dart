@@ -31,8 +31,8 @@ class _ProductContentSecondState extends State<ProductContentSecond>
       children: [
         Expanded(
             child: WebView(
-              initialUrl: "https://jdmall.itying.com/pcontent?id=$_id",
-            ))
+          initialUrl: "https://jdmall.itying.com/pcontent?id=$_id",
+        ))
       ],
     );
   }

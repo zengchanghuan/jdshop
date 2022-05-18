@@ -2,35 +2,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../services/ScreenAdapter.dart';
 import '../../widget/JdButton.dart';
-
-import '../../model/ProductContentModel.dart';
+import '../../model/product_content_model.dart';
 
 import '../../config/Config.dart';
 
 class ProductContentFirst extends StatefulWidget {
   final List _productContentList;
-  ProductContentFirst(this._productContentList, {Key? key}) : super(key: key);
+  const ProductContentFirst(this._productContentList, {Key? key}) : super(key: key);
 
+  @override
   _ProductContentFirstState createState() => _ProductContentFirstState();
 }
 
 class _ProductContentFirstState extends State<ProductContentFirst>
     with AutomaticKeepAliveClientMixin {
 
-  late ProductContentitem _productContent;
+  late ProductContentItem _productContent;
 
   List _attr = [];
 
   String _selectedValue="";
 
+  @override
   bool get wantKeepAlive => true;
 
   @override
   void initState() {
     super.initState();
-    this._productContent = widget._productContentList[0];
+    _productContent = widget._productContentList[0];
 
-    this._attr = this._productContent.attr;
+    _attr = _productContent.attr;
 
     _initAttr();
 
@@ -38,9 +39,9 @@ class _ProductContentFirstState extends State<ProductContentFirst>
 
     // list":["系带","非系带"]
 
-    /*   
+    /*
     [
-      
+
         {
         "cate":"尺寸",
         list":[{
@@ -69,14 +70,14 @@ class _ProductContentFirstState extends State<ProductContentFirst>
             },
           ]
         }
-    ]    
+    ]
    */
   }
 
   //初始化Attr 格式化数据
   _initAttr() {
     //注意attrList属性需要在model中定义
-    var attr = this._attr;
+    var attr = _attr;
     for (var i = 0; i < attr.length; i++) {
       for (var j = 0; j < attr[i].list.length; j++) {
         if (j == 0) {
@@ -94,7 +95,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
 
   //改变属性值
   _changeAttr(cate, title, setBottomState) {
-    var attr = this._attr;
+    var attr = _attr;
     for (var i = 0; i < attr.length; i++) {
       if (attr[i].cate == cate) {
         for (var j = 0; j < attr[i].attrList.length; j++) {
@@ -107,13 +108,13 @@ class _ProductContentFirstState extends State<ProductContentFirst>
     }
     setBottomState(() {
       //注意  改变showModalBottomSheet里面的数据 来源于StatefulBuilder
-      this._attr = attr;
+      _attr = attr;
     });
     _getSelectedAttrValue();
   }
   //获取选中的值
   _getSelectedAttrValue() {
-    var _list = this._attr;
+    var _list = _attr;
     List tempArr = [];
     for (var i = 0; i < _list.length; i++) {
       for (var j = 0; j < _list[i].attrList.length; j++) {
@@ -124,7 +125,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
     }
     // print(tempArr.join(','));
     setState(() {
-      this._selectedValue = tempArr.join(',');
+      _selectedValue = tempArr.join(',');
     });
   }
 
@@ -133,14 +134,14 @@ class _ProductContentFirstState extends State<ProductContentFirst>
     List<Widget> attrItemList = [];
     attrItem.attrList.forEach((item) {
       attrItemList.add(Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: InkWell(
           onTap: () {
             _changeAttr(attrItem.cate, item["title"], setBottomState);
           },
           child: Chip(
             label: Text("${item["title"]}"),
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             backgroundColor: item["checked"] ? Colors.red : Colors.black26,
           ),
         ),
@@ -152,18 +153,18 @@ class _ProductContentFirstState extends State<ProductContentFirst>
   //封装一个组件 渲染attr
   List<Widget> _getAttrWidget(setBottomState) {
     List<Widget> attrList = [];
-    this._attr.forEach((attrItem) {
+    _attr.forEach((attrItem) {
       attrList.add(Wrap(
         children: <Widget>[
-          Container(
+          SizedBox(
             width: ScreenAdapter.width(120),
             child: Padding(
               padding: EdgeInsets.only(top: ScreenAdapter.height(22)),
               child: Text("${attrItem.cate}: ",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
           ),
-          Container(
+          SizedBox(
             width: ScreenAdapter.width(590),
             child: Wrap(
               children: _getAttrItemWidget(attrItem, setBottomState),
@@ -184,53 +185,53 @@ class _ProductContentFirstState extends State<ProductContentFirst>
           return StatefulBuilder(
             builder: (BuildContext context, setBottomState) {
               return Stack(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(ScreenAdapter.width(20)),
-                      child: ListView(
-                        children: <Widget>[
-                          Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: _getAttrWidget(setBottomState))
-                        ],
-                      ),
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.all(ScreenAdapter.width(20)),
+                    child: ListView(
+                      children: <Widget>[
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: _getAttrWidget(setBottomState))
+                      ],
                     ),
-                    Positioned(
-                      bottom: 0,
-                      width: ScreenAdapter.width(750),
-                      height: ScreenAdapter.height(76),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: JdButton(
-                                color: Color.fromRGBO(253, 1, 0, 0.9),
-                                text: "加入购物车",
-                                cb: () {
-                                  print('加入购物车');
-                                },
-                              ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    width: ScreenAdapter.width(750),
+                    height: ScreenAdapter.height(76),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                            child: JdButton(
+                              color: Color.fromRGBO(253, 1, 0, 0.9),
+                              text: "加入购物车",
+                              cb: () {
+                                print('加入购物车');
+                              },
                             ),
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                child: JdButton(
-                                  color: Color.fromRGBO(255, 165, 0, 0.9),
-                                  text: "立即购买",
-                                  cb: () {
-                                    print('立即购买');
-                                  },
-                                )),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                );
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              child: JdButton(
+                                color: Color.fromRGBO(255, 165, 0, 0.9),
+                                text: "立即购买",
+                                cb: () {
+                                  print('立即购买');
+                                },
+                              )),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              );
             },
           );
         });
@@ -239,7 +240,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
   @override
   Widget build(BuildContext context) {
     //处理图片
-    String pic = Config.domain + this._productContent.pic;
+    String pic = Config.domain + _productContent.pic;
     pic = pic.replaceAll('\\', '/');
 
     return Container(
@@ -252,28 +253,28 @@ class _ProductContentFirstState extends State<ProductContentFirst>
           ),
           //标题
           Container(
-            padding: EdgeInsets.only(top: 10),
-            child: Text("${this._productContent.title}",
+            padding: const EdgeInsets.only(top: 10),
+            child: Text("${_productContent.title}",
                 style: TextStyle(
                     color: Colors.black87, fontSize: ScreenAdapter.size(36))),
           ),
           Container(
               padding: EdgeInsets.only(top: 10),
-              child: Text("${this._productContent.subTitle}",
+              child: Text("${_productContent.subTitle}",
                   style: TextStyle(
                       color: Colors.black54,
                       fontSize: ScreenAdapter.size(28)))),
           //价格
           Container(
-            padding: EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 10),
             child: Row(
               children: <Widget>[
                 Expanded(
                   flex: 1,
                   child: Row(
                     children: <Widget>[
-                      Text("特价: "),
-                      Text("¥${this._productContent.price}",
+                      const Text("特价: "),
+                      Text("¥${_productContent.price}",
                           style: TextStyle(
                               color: Colors.red,
                               fontSize: ScreenAdapter.size(46))),
@@ -285,8 +286,8 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Text("原价: "),
-                      Text("¥${this._productContent.oldPrice}",
+                      const Text("原价: "),
+                      Text("¥${_productContent.oldPrice}",
                           style: TextStyle(
                               color: Colors.black38,
                               fontSize: ScreenAdapter.size(28),
@@ -298,35 +299,35 @@ class _ProductContentFirstState extends State<ProductContentFirst>
             ),
           ),
           //筛选
-          this._attr.length > 0
+          _attr.isNotEmpty
               ? Container(
-                  margin: EdgeInsets.only(top: 10),
-                  height: ScreenAdapter.height(80),
-                  child: InkWell(
-                    onTap: () {
-                      _attrBottomSheet();
-                    },
-                    child: Row(
-                      children: <Widget>[
-                        Text("已选: ",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text("${this._selectedValue}")
-                      ],
-                    ),
-                  ),
-                )
-              : Text(""),
-          Divider(),
-          Container(
+            margin: const EdgeInsets.only(top: 10),
+            height: ScreenAdapter.height(80),
+            child: InkWell(
+              onTap: () {
+                _attrBottomSheet();
+              },
+              child: Row(
+                children: <Widget>[
+                  const Text("已选: ",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(_selectedValue)
+                ],
+              ),
+            ),
+          )
+              : const Text(""),
+          const Divider(),
+          SizedBox(
             height: ScreenAdapter.height(80),
             child: Row(
-              children: <Widget>[
+              children: const <Widget>[
                 Text("运费: ", style: TextStyle(fontWeight: FontWeight.bold)),
                 Text("免运费")
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     );

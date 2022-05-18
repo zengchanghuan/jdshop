@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../services/ScreenAdapter.dart';
 import '../../config/Config.dart';
@@ -5,8 +6,9 @@ import 'package:dio/dio.dart';
 import '../../model/CateModel.dart';
 
 class CategoryPage extends StatefulWidget {
-  CategoryPage({Key? key}) : super(key: key);
+  const CategoryPage({Key? key}) : super(key: key);
 
+  @override
   _CategoryPageState createState() => _CategoryPageState();
 }
 
@@ -24,17 +26,19 @@ class _CategoryPageState extends State<CategoryPage>
   void initState() {
     super.initState();
     _getLeftCateData();
-    print("category");
+    if (kDebugMode) {
+      print("category");
+    }
   }
 
   //左侧分类
   _getLeftCateData() async {
     var api = '${Config.domain}api/pcate';
     var result = await Dio().get(api);
-    var leftCateList = new CateModel.fromJson(result.data);
+    var leftCateList = CateModel.fromJson(result.data);
     // print(leftCateList.result);
     setState(() {
-      this._leftCateList = leftCateList.result;
+      _leftCateList = leftCateList.result;
     });
     _getRightCateData(leftCateList.result[0].sId);
   }
@@ -43,21 +47,21 @@ class _CategoryPageState extends State<CategoryPage>
   _getRightCateData(pid) async {
     var api = '${Config.domain}api/pcate?pid=${pid}';
     var result = await Dio().get(api);
-    var rightCateList = new CateModel.fromJson(result.data);
+    var rightCateList = CateModel.fromJson(result.data);
     // print(rightCateList.result);
     setState(() {
-      this._rightCateList = rightCateList.result;
+      _rightCateList = rightCateList.result;
     });
   }
 
   Widget _leftCateWidget(leftWidth) {
-    if (this._leftCateList.length > 0) {
-      return Container(
+    if (_leftCateList.isNotEmpty) {
+      return SizedBox(
         width: leftWidth,
         height: double.infinity,
         // color: Colors.red,
         child: ListView.builder(
-          itemCount: this._leftCateList.length,
+          itemCount: _leftCateList.length,
           itemBuilder: (context, index) {
             return Column(
               children: <Widget>[
@@ -65,73 +69,67 @@ class _CategoryPageState extends State<CategoryPage>
                   onTap: () {
                     setState(() {
                       _selectIndex = index;
-                      this._getRightCateData(this._leftCateList[index].sId);
+                      _getRightCateData(_leftCateList[index].sId);
                     });
                   },
                   child: Container(
                     width: double.infinity,
                     height: ScreenAdapter.height(84),
                     padding: EdgeInsets.only(top: ScreenAdapter.height(24)),
-                    child: Text("${this._leftCateList[index].title}",
+                    child: Text("${_leftCateList[index].title}",
                         textAlign: TextAlign.center),
                     color: _selectIndex == index
-                        ? Color.fromRGBO(240, 246, 246, 0.9)
+                        ? const Color.fromRGBO(240, 246, 246, 0.9)
                         : Colors.white,
                   ),
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
               ],
             );
           },
         ),
       );
     } else {
-      return Container(width: leftWidth, height: double.infinity);
+      return SizedBox(width: leftWidth, height: double.infinity);
     }
   }
 
   Widget _rightCateWidget(rightItemWidth, rightItemHeight) {
-    if (this._rightCateList.length > 0) {
+    if (_rightCateList.isNotEmpty) {
       return Expanded(
         flex: 1,
         child: Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             height: double.infinity,
-            color: Color.fromRGBO(240, 246, 246, 0.9),
+            color: const Color.fromRGBO(240, 246, 246, 0.9),
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   childAspectRatio: rightItemWidth / rightItemHeight,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10),
-              itemCount: this._rightCateList.length,
+              itemCount: _rightCateList.length,
               itemBuilder: (context, index) {
                 //处理图片
-                String pic = this._rightCateList[index].pic;
+                String pic = _rightCateList[index].pic;
                 pic = Config.domain + pic.replaceAll('\\', '/');
 
                 return InkWell(
-                  onTap: (){
-
-                    Navigator.pushNamed(context, '/productList',arguments: {
-                      "cid":this._rightCateList[index].sId
-                    });
-                    
+                  onTap: () {
+                    Navigator.pushNamed(context, '/productList',
+                        arguments: {"cid": _rightCateList[index].sId});
                   },
-                  child: Container(
-                    // padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: <Widget>[
-                        AspectRatio(
-                          aspectRatio: 1 / 1,
-                          child: Image.network("${pic}", fit: BoxFit.cover),
-                        ),
-                        Container(
-                          height: ScreenAdapter.height(28),
-                          child: Text("${this._rightCateList[index].title}"),
-                        )
-                      ],
-                    ),
+                  child: Column(
+                    children: <Widget>[
+                      AspectRatio(
+                        aspectRatio: 1 / 1,
+                        child: Image.network(pic, fit: BoxFit.cover),
+                      ),
+                      SizedBox(
+                        height: ScreenAdapter.height(28),
+                        child: Text("${_rightCateList[index].title}"),
+                      )
+                    ],
                   ),
                 );
               },
@@ -141,17 +139,17 @@ class _CategoryPageState extends State<CategoryPage>
       return Expanded(
           flex: 1,
           child: Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             height: double.infinity,
-            color: Color.fromRGBO(240, 246, 246, 0.9),
-            child: Text("加载中..."),
+            color: const Color.fromRGBO(240, 246, 246, 0.9),
+            child: const Text("加载中..."),
           ));
     }
   }
 
   @override
-  Widget build(BuildContext context) { 
-
+  Widget build(BuildContext context) {
+    super.build(context);
     //左侧宽度
     var leftWidth = ScreenAdapter.getScreenWidth() / 4;
     //右侧每一项宽度=（总宽度-左侧宽度-GridView外侧元素左右的Padding值-GridView中间的间距）/3
@@ -162,11 +160,44 @@ class _CategoryPageState extends State<CategoryPage>
     //获取计算后的高度
     var rightItemHeight = rightItemWidth + ScreenAdapter.height(28);
 
-    return Row(
-      children: <Widget>[
-        _leftCateWidget(leftWidth),
-        _rightCateWidget(rightItemWidth, rightItemHeight)
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        leading: const IconButton(
+          icon: Icon(Icons.center_focus_weak, size: 28, color: Colors.black87),
+          onPressed: null,
+        ),
+        title: InkWell(
+          child: Container(
+            height: ScreenAdapter.height(68),
+            decoration: BoxDecoration(
+                color: const Color.fromRGBO(233, 233, 233, 0.8),
+                borderRadius: BorderRadius.circular(30)),
+            padding: const EdgeInsets.only(left: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                const Icon(Icons.search),
+                Text("笔记本", style: TextStyle(fontSize: ScreenAdapter.size(28)))
+              ],
+            ),
+          ),
+          onTap: () {
+            Navigator.pushNamed(context, '/search');
+          },
+        ),
+        actions: const <Widget>[
+          IconButton(
+            icon: Icon(Icons.message, size: 28, color: Colors.black87),
+            onPressed: null,
+          )
+        ],
+      ),
+      body: Row(
+        children: <Widget>[
+          _leftCateWidget(leftWidth),
+          _rightCateWidget(rightItemWidth, rightItemHeight)
+        ],
+      ),
     );
   }
 }

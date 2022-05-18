@@ -6,7 +6,7 @@ import '../pages/ProductContent.dart';
 //配置路由
 final Map<String,Function> routes = {
   '/': (context) => Tabs(),
-  '/search': (context) => SearchPage(),
+  '/search': (context) => const SearchPage(),
   '/productList': (context,{arguments}) => ProductListPage(arguments:arguments),
   '/productContent': (context,{arguments}) => ProductContentPage(arguments:arguments),
 };
