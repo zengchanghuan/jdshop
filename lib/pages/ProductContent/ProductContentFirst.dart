@@ -4,7 +4,7 @@ import 'package:jdshop/model/product_content_model.dart';
 import '../../services/ScreenAdapter.dart';
 import '../../widget/JdButton.dart';
 import '../../config/Config.dart';
-import '../../services/event_bus.dart';
+
 class ProductContentFirst extends StatefulWidget {
   final List _productContentList;
 
@@ -15,17 +15,9 @@ class ProductContentFirst extends StatefulWidget {
   _ProductContentFirstState createState() => _ProductContentFirstState();
 }
 
-class _ProductContentFirstState extends State<ProductContentFirst> with AutomaticKeepAliveClientMixin {
-
+class _ProductContentFirstState extends State<ProductContentFirst> {
   late ProductContentItem _productContent;
   List _attr = [];
-  String _selectedValue="";
-
-  @override
-  bool get wantKeepAlive => true;
-
-  var actionEventBus;
-
 
   @override
   void initState() {
@@ -33,74 +25,9 @@ class _ProductContentFirstState extends State<ProductContentFirst> with Automati
     _productContent = widget._productContentList[0];
     _attr = _productContent.attr;
 
-    _initAttr();
-
-
-    actionEventBus=eventBus.on<ProductContentEvent>().listen((str) {
-      if (kDebugMode) {
-        print(str);
-      }
-      _attrBottomSheet();
-    });
-  }
-
-  @override
-  void dispose(){
-    super.dispose();
-    actionEventBus.cancel();  //取消事件监听
-  }
-
-  //初始化Attr 格式化数据
-  _initAttr() {
-    var attr = _attr;
-    for (var i = 0; i < attr.length; i++) {
-      for (var j = 0; j < attr[i].list.length; j++) {
-        if (j == 0) {
-          attr[i].attrList.add({"title": attr[i].list[j], "checked": true});
-        } else {
-          attr[i].attrList.add({"title": attr[i].list[j], "checked": false});
-        }
-      }
+    if (kDebugMode) {
+      print(_attr);
     }
-    _getSelectedAttrValue();
-  }
-
-
-  //改变属性值
-  _changeAttr(cate, title, setBottomState) {
-    var attr = _attr;
-    for (var i = 0; i < attr.length; i++) {
-      if (attr[i].cate == cate) {
-        for (var j = 0; j < attr[i].attrList.length; j++) {
-          attr[i].attrList[j]["checked"] = false;
-          if (title == attr[i].attrList[j]["title"]) {
-            attr[i].attrList[j]["checked"] = true;
-          }
-        }
-      }
-    }
-    setBottomState(() {
-      //注意  改变showModalBottomSheet里面的数据 来源于StatefulBuilder
-      _attr = attr;
-    });
-    _getSelectedAttrValue();
-  }
-
-  //获取选中的值
-  _getSelectedAttrValue() {
-    var _list = _attr;
-    List tempArr = [];
-    for (var i = 0; i < _list.length; i++) {
-      for (var j = 0; j < _list[i].attrList.length; j++) {
-        if (_list[i].attrList[j]['checked'] == true) {
-          tempArr.add(_list[i].attrList[j]["title"]);
-        }
-      }
-    }
-    // print(tempArr.join(','));
-    setState(() {
-      _selectedValue = tempArr.join(',');
-    });
   }
 
   List<Widget> _getAttrItemWidget(attrItem) {
@@ -207,7 +134,6 @@ class _ProductContentFirstState extends State<ProductContentFirst> with Automati
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     //处理图片
     String pic = Config.domain + _productContent.pic;
     pic = pic.replaceAll('\\', '/');
