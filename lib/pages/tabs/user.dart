@@ -1,9 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:jdshop/provider/counter.dart';
+import '../../provider/counter.dart';
 import 'package:provider/provider.dart';
-// import '../../provider/Counter.dart';
 
 
 class UserPage extends StatefulWidget {

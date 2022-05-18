@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'routers/router.dart';
 import 'provider/counter.dart';
 import 'package:provider/provider.dart';
+import 'provider/cart.dart';
+
 import './pages/tabs/Cart.dart';
 void main() => runApp(MyApp());
 
@@ -22,6 +24,7 @@ class _MyAppState extends State<MyApp> {
               providers: 
               [
                 ChangeNotifierProvider(create: (_) => CountNotifier()),
+                ChangeNotifierProvider(create: (_) => Cart()),
               ],
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
