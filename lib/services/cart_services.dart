@@ -86,7 +86,12 @@ class CartServices {
     final Map data = <String, dynamic>{};
     data['_id'] = item.sId;
     data['title'] = item.title;
-    data['price'] = item.price;
+    //处理 string 和int类型的价格
+    if (item.price is int || item.price is double) {
+      data['price'] = item.price;
+    } else {
+      data['price'] = double.parse(item.price);
+    }
     data['selectedAttr'] = item.selectedAttr;
     data['count'] = item.count;
     data['pic'] = pic;
