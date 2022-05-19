@@ -12,6 +12,7 @@ import '../../config/Config.dart';
 import '../../services/event_bus.dart';
 import '../ProductContent/cart_number.dart';
 import '../../provider/cart.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProductContentFirst extends StatefulWidget {
   final List _productContentList;
@@ -265,6 +266,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                                 await CartServices.addCart(_productContent);
                                 Navigator.of(context).pop();
                                 cartProvider.updateCartList();
+                                Fluttertoast.showToast( msg: '加入购物车成功', toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.CENTER,);
                                 if (kDebugMode) {
                                   print('加入购物车');
                                 }
