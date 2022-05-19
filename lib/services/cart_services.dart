@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'Storage.dart';
 import '../config/config.dart';
@@ -84,7 +83,7 @@ class CartServices {
     String pic = item.pic;
     pic = Config.domain + pic.replaceAll('\\', '/');
 
-    final Map data = new Map<String, dynamic>();
+    final Map data = <String, dynamic>{};
     data['_id'] = item.sId;
     data['title'] = item.title;
     data['price'] = item.price;
