@@ -4,7 +4,8 @@ import './cart_num.dart';
 
 class CartItem extends StatefulWidget {
   final Map _itemData;
-  const CartItem(this._itemData,{Key? key}) : super(key: key);
+
+  const CartItem(this._itemData, {Key? key}) : super(key: key);
 
   @override
   _CartItemState createState() => _CartItemState();
@@ -12,12 +13,13 @@ class CartItem extends StatefulWidget {
 
 class _CartItemState extends State<CartItem> {
   late Map _itemData;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _itemData=widget._itemData;
+    _itemData = widget._itemData;
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,29 +39,24 @@ class _CartItemState extends State<CartItem> {
           ),
           SizedBox(
             width: ScreenAdapter.width(160),
-            child: Image.network(
-                "${_itemData["pic"]}",
-                fit: BoxFit.cover),
+            child: Image.network("${_itemData["pic"]}", fit: BoxFit.cover),
           ),
           Expanded(
             flex: 1,
             child: Container(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("${_itemData["title"]}",
-                      maxLines: 2),
-                  Text("${_itemData["selectedAttr"]}",
-                      maxLines: 2),
+                  Text("${_itemData["title"]}", maxLines: 2),
+                  Text("${_itemData["selectedAttr"]}", maxLines: 2),
                   Stack(
                     children: <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Text("￥${_itemData["price"]}",style: const TextStyle(
-                            color: Colors.red
-                        )),
+                        child: Text("￥${_itemData["price"]}",
+                            style: const TextStyle(color: Colors.red)),
                       ),
                       Align(
                         alignment: Alignment.centerRight,
