@@ -12,7 +12,7 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("用户中心"),
+        title: const Text("用户中心"),
       ),
       body: const Center(
         child: Text("用户中心"),
