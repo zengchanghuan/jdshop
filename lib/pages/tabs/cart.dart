@@ -13,7 +13,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  final bool _isEdit = false;
+  bool _isEdit = false;
 
   @override
   void initState() {
@@ -29,10 +29,14 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("购物车"),
-        actions: const <Widget>[
+        actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.launch),
-            onPressed: null,
+            icon: const Icon(Icons.launch),
+            onPressed: () {
+              setState(() {
+                _isEdit = !_isEdit;
+              });
+            },
           )
         ],
       ),
@@ -78,7 +82,9 @@ class _CartPageState extends State<CartPage> {
                               ),
                               const Text("全选"),
                               const SizedBox(width: 20),
-                              _isEdit == false ? const Text("合计:") : const Text(""),
+                              _isEdit == false
+                                  ? const Text("合计:")
+                                  : const Text(""),
                               _isEdit == false
                                   ? Text("${cartProvider.allPrice}",
                                       style: const TextStyle(
@@ -87,14 +93,31 @@ class _CartPageState extends State<CartPage> {
                             ],
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: ElevatedButton(
-                            child: const Text("结算",
-                                style: TextStyle(color: Colors.white)),
-                            onPressed: () {},
-                          ),
-                        )
+                        _isEdit == false
+                            ? Align(
+                                alignment: Alignment.centerRight,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.red,
+                                  ),
+                                  child: const Text("结算",
+                                      style: TextStyle(color: Colors.white)),
+                                  onPressed: () {},
+                                ),
+                              )
+                            : Align(
+                                alignment: Alignment.centerRight,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.red,
+                                  ),
+                                  child: const Text("删除",
+                                      style: TextStyle(color: Colors.white)),
+                                  onPressed: () {
+                                    cartProvider.removeItem();
+                                  },
+                                ),
+                              )
                       ],
                     ),
                   ),
