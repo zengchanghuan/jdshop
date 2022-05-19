@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../provider/cart.dart';
 import '../../services/ScreenAdapter.dart';
 
 class CartNum extends StatefulWidget {
-  const CartNum({Key? key}) : super(key: key);
+  const CartNum(Map<dynamic, dynamic> itemData, {Key? key}) : super(key: key);
 
   @override
   State<CartNum> createState() => _CartNumState();

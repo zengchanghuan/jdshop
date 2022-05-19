@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../cart/cart_item.dart';
 import '../../services/ScreenAdapter.dart';
-
+import '../../provider/cart.dart';
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
@@ -21,6 +22,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    var cartProvider = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("购物车"),
@@ -31,10 +33,17 @@ class _CartPageState extends State<CartPage> {
           )
         ],
       ),
-      body: Stack(
+      body: cartProvider.cartList.isNotEmpty
+          ? Stack(
         children: <Widget>[
           ListView(
-            children: const <Widget>[CartItem(), CartItem(), CartItem()],
+            children: <Widget>[
+              Column(
+                  children: cartProvider.cartList.map((value) {
+                    return CartItem(value);
+                  }).toList()),
+              SizedBox(height: ScreenAdapter.height(100))
+            ],
           ),
           Positioned(
             bottom: 0,
@@ -42,8 +51,8 @@ class _CartPageState extends State<CartPage> {
             height: ScreenAdapter.height(78),
             child: Container(
               decoration: const BoxDecoration(
-                border:
-                    Border(top: BorderSide(width: 1, color: Colors.black12)),
+                border: Border(
+                    top: BorderSide(width: 1, color: Colors.black12)),
                 color: Colors.white,
               ),
               width: ScreenAdapter.width(750),
@@ -68,12 +77,10 @@ class _CartPageState extends State<CartPage> {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: ElevatedButton(
-                      child: const Text("结算",
+                    child: RaisedButton(
+                      child: Text("结算",
                           style: TextStyle(color: Colors.white)),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.red),
-                      ),
+                      color: Colors.red,
                       onPressed: () {},
                     ),
                   )
@@ -82,6 +89,9 @@ class _CartPageState extends State<CartPage> {
             ),
           )
         ],
+      )
+          : const Center(
+        child: Text("购物车空空的..."),
       ),
     );
   }

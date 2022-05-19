@@ -3,13 +3,21 @@ import '../../services/ScreenAdapter.dart';
 import './cart_num.dart';
 
 class CartItem extends StatefulWidget {
-  const CartItem({Key? key}) : super(key: key);
+  final Map _itemData;
+  const CartItem(this._itemData,{Key? key}) : super(key: key);
 
   @override
-  State<CartItem> createState() => _CartItemState();
+  _CartItemState createState() => _CartItemState();
 }
 
 class _CartItemState extends State<CartItem> {
+  late Map _itemData;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _itemData=widget._itemData;
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +38,7 @@ class _CartItemState extends State<CartItem> {
           SizedBox(
             width: ScreenAdapter.width(160),
             child: Image.network(
-                "https://www.itying.com/images/flutter/list2.jpg",
+                "${_itemData["pic"]}",
                 fit: BoxFit.cover),
           ),
           Expanded(
@@ -39,19 +47,23 @@ class _CartItemState extends State<CartItem> {
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const Text(
-                      "菲特旋转盖轻量杯不锈钢保温杯学生杯商务杯情侣杯保冷杯子便携水杯LHC4131WB(450Ml)白蓝",
+                  Text("${_itemData["title"]}",
+                      maxLines: 2),
+                  Text("${_itemData["selectedAttr"]}",
                       maxLines: 2),
                   Stack(
-                    children: const <Widget>[
+                    children: <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Text("￥12", style: TextStyle(color: Colors.red)),
+                        child: Text("￥${_itemData["price"]}",style: const TextStyle(
+                            color: Colors.red
+                        )),
                       ),
                       Align(
                         alignment: Alignment.centerRight,
-                        child: CartNum(),
+                        child: CartNum(_itemData),
                       )
                     ],
                   )

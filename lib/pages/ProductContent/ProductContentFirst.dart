@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:jdshop/services/cart_services.dart';
 import '../../services/ScreenAdapter.dart';
 import '../../widget/JdButton.dart';
 
@@ -9,6 +10,7 @@ import '../../model/ProductContentModel.dart';
 import '../../config/Config.dart';
 import '../../services/event_bus.dart';
 import '../ProductContent/cart_number.dart';
+import '../../provider/cart.dart';
 
 class ProductContentFirst extends StatefulWidget {
   final List _productContentList;
@@ -31,6 +33,9 @@ class _ProductContentFirstState extends State<ProductContentFirst>
   @override
   bool get wantKeepAlive => true;
   dynamic actionEventBus;
+
+  var cartProvider;
+
 
   @override
   void initState() {
@@ -91,7 +96,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
   @override
   void dispose(){
     super.dispose();
-    actionEventBus.destroy();
+    actionEventBus.cancel();
   }
 
   //初始化Attr 格式化数据
@@ -254,7 +259,10 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                             child: JdButton(
                               color: const Color.fromRGBO(253, 1, 0, 0.9),
                               text: "加入购物车",
-                              cb: () {
+                              cb: () async {
+                                await CartServices.addCart(_productContent);
+                                Navigator.of(context).pop();
+                                cartProvider.updateCartList();
                                 if (kDebugMode) {
                                   print('加入购物车');
                                 }
