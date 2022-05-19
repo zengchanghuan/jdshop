@@ -87,6 +87,12 @@ class _ProductContentFirstState extends State<ProductContentFirst>
    */
   }
 
+  @override
+  void dispose(){
+    super.dispose();
+    actionEventBus.destroy();
+  }
+
   //初始化Attr 格式化数据
   _initAttr() {
     //注意attrList属性需要在model中定义

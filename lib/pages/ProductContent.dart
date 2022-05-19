@@ -16,17 +16,17 @@ import '../services/event_bus.dart';
 
 class ProductContentPage extends StatefulWidget {
   final Map arguments;
-  const ProductContentPage({Key? key, required this.arguments}) : super(key: key);
+
+  const ProductContentPage({Key? key, required this.arguments})
+      : super(key: key);
 
   @override
   _ProductContentPageState createState() => _ProductContentPageState();
 }
 
 class _ProductContentPageState extends State<ProductContentPage> {
+  final List _productContentList = [];
 
-
-  final List _productContentList=[];
-  
   @override
   void initState() {
     // TODO: implement initState
@@ -35,9 +35,9 @@ class _ProductContentPageState extends State<ProductContentPage> {
 
     _getContentData();
   }
-  _getContentData() async{
-    
-    var api ='${Config.domain}api/pcontent?id=${widget.arguments['id']}';
+
+  _getContentData() async {
+    var api = '${Config.domain}api/pcontent?id=${widget.arguments['id']}';
 
     print(api);
     var result = await Dio().get(api);
@@ -80,116 +80,117 @@ class _ProductContentPageState extends State<ProductContentPage> {
               )
             ],
           ),
-        
           actions: <Widget>[
-
             IconButton(
               icon: const Icon(Icons.more_horiz),
-              onPressed: (){
+              onPressed: () {
                 showMenu(
-                    context:context,
-                    position:RelativeRect.fromLTRB(ScreenAdapter.width(600), 76, 10, 0) ,
+                    context: context,
+                    position: RelativeRect.fromLTRB(
+                        ScreenAdapter.width(600), 76, 10, 0),
                     items: [
-                        PopupMenuItem(
-                          child: Row(
-                            children: const <Widget>[
-                              Icon(Icons.home),
-                              Text("首页")
-                            ],
-                          ),
+                      PopupMenuItem(
+                        child: Row(
+                          children: const <Widget>[
+                            Icon(Icons.home),
+                            Text("首页")
+                          ],
                         ),
-                        PopupMenuItem(
-                          child: Row(
-                            children: const <Widget>[
-                              Icon(Icons.search),
-                              Text("搜索")
-                            ],
-                          ),
-                        )
-                    ]
-                );
+                      ),
+                      PopupMenuItem(
+                        child: Row(
+                          children: const <Widget>[
+                            Icon(Icons.search),
+                            Text("搜索")
+                          ],
+                        ),
+                      )
+                    ]);
               },
             )
-
           ],
         ),
-        body: _productContentList.isNotEmpty?Stack(
-
-          children: <Widget>[
-
-            TabBarView(
-                physics: const NeverScrollableScrollPhysics(), //禁止 pageView 滑动
+        body: _productContentList.isNotEmpty
+            ? Stack(
                 children: <Widget>[
-                  ProductContentFirst(_productContentList),
-                  ProductContentSecond(_productContentList),
-                  const ProductContentThird()
-                ],
-             ),
-             Positioned(
-               width: ScreenAdapter.width(750),
-               height: ScreenAdapter.width(88),
-               bottom: 0,
-               child: Container(               
-                decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      color: Colors.black26,
-                      width: 1
-                    )
+                  TabBarView(
+                    physics:
+                        const NeverScrollableScrollPhysics(), //禁止 pageView 滑动
+                    children: <Widget>[
+                      ProductContentFirst(_productContentList),
+                      ProductContentSecond(_productContentList),
+                      const ProductContentThird()
+                    ],
                   ),
-                  color: Colors.white
-                ),
-                child: Row(
-                  children: <Widget>[
-
-                    Container(
-                      padding: EdgeInsets.only(top:ScreenAdapter.height(10)),
-                      width: 100,
-                      height: ScreenAdapter.height(88),
-                      child: Column(
+                  Positioned(
+                    width: ScreenAdapter.width(750),
+                    height: ScreenAdapter.width(88),
+                    bottom: 0,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              top: BorderSide(color: Colors.black26, width: 1)),
+                          color: Colors.white),
+                      child: Row(
                         children: <Widget>[
-                          Icon(Icons.shopping_cart,size: ScreenAdapter.size(36),),
-                          Text("购物车",style: TextStyle(
-                            fontSize: ScreenAdapter.size(24)
-                          ))
+                          Container(
+                            padding:
+                                EdgeInsets.only(top: ScreenAdapter.height(10)),
+                            width: 100,
+                            height: ScreenAdapter.height(88),
+                            child: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.shopping_cart,
+                                  size: ScreenAdapter.size(36),
+                                ),
+                                Text("购物车",
+                                    style: TextStyle(
+                                        fontSize: ScreenAdapter.size(24)))
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: JdButton(
+                              color: const Color.fromRGBO(253, 1, 0, 0.9),
+                              text: "加入购物车",
+                              cb: () {
+                                //广播
+                                if (_productContentList[0].attr.length > 0) {
+                                  eventBus.fire(ProductContentEvent('加入购物车'));
+                                } else {
+                                  if (kDebugMode) {
+                                    print('加入购物车');
+                                  }
+                                }
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: JdButton(
+                              color: const Color.fromRGBO(255, 165, 0, 0.9),
+                              text: "立即购买",
+                              cb: () {
+                                //广播
+                                if (_productContentList[0].attr.length > 0) {
+                                  eventBus.fire(ProductContentEvent('立即购买'));
+                                } else {
+                                  if (kDebugMode) {
+                                    print('立即购买');
+                                  }
+                                }
+                              },
+                            ),
+                          )
                         ],
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: JdButton(
-                        color:const Color.fromRGBO(253, 1, 0, 0.9),
-                        text: "加入购物车",
-                        cb: (){
-                          //广播
-                          eventBus.fire(ProductContentEvent('加入购物车'));
-                          if (kDebugMode) {
-                            print('加入购物车');
-                          }
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: JdButton(
-                        color: const Color.fromRGBO(255, 165, 0, 0.9),
-                        text: "立即购买",
-                        cb: (){
-                          //广播
-                          eventBus.fire(ProductContentEvent('立即购买'));
-                          if (kDebugMode) {
-                            print('立即购买');
-                          }
-                        },
-                      ),
-                    )
-
-                  ],
-                ),
-               ),
-             )
-          ],
-        ):const LoadingWidget(),
+                  )
+                ],
+              )
+            : const LoadingWidget(),
       ),
     );
   }
