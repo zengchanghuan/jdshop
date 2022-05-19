@@ -36,7 +36,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
   bool get wantKeepAlive => true;
   dynamic actionEventBus;
 
-  var cartProvider;
+  dynamic cartProvider;
 
   @override
   void initState() {

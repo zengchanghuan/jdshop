@@ -15,15 +15,11 @@ class CartItem extends StatefulWidget {
 
 class _CartItemState extends State<CartItem> {
   late Map _itemData;
-
-  @override
-  void initState() {
-    super.initState();
-    _itemData = widget._itemData;
-  }
-
+  
   @override
   Widget build(BuildContext context) {
+    _itemData = widget._itemData;
+
     var cartProvider = Provider.of<Cart>(context);
     return Container(
       height: ScreenAdapter.height(200),
