@@ -33,6 +33,11 @@ class ProductContentitem {
   int? salecount;
   String? subTitle;
 
+  //新增
+  int count=1;
+  String selectedAttr="";
+
+
   ProductContentitem({
     this.sId,
     this.title,
@@ -68,6 +73,7 @@ class ProductContentitem {
     cname = json['cname'];
     salecount = json['salecount'];
     subTitle = json['sub_title'];
+
   }
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
@@ -101,7 +107,7 @@ class Attr {
 
   Attr.fromJson(Map<String, dynamic> json) {
     cate = json['cate'];
-    list = List<String>.from(json['list']);    
+    list = List<String>.from(json['list']);
   }
 
   Map<String, dynamic> toJson() {

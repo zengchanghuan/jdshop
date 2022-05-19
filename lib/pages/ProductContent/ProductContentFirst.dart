@@ -8,6 +8,7 @@ import '../../model/ProductContentModel.dart';
 
 import '../../config/Config.dart';
 import '../../services/event_bus.dart';
+import '../ProductContent/cart_number.dart';
 
 class ProductContentFirst extends StatefulWidget {
   final List _productContentList;
@@ -215,7 +216,28 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                       children: <Widget>[
                         Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: _getAttrWidget(setBottomState))
+                            children: _getAttrWidget(setBottomState)),
+                        const Divider(),
+                        Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          height: ScreenAdapter.height(80),
+                          child: InkWell(
+                            onTap: () {
+                              _attrBottomSheet();
+                            },
+                            child: Row(
+                              children: <Widget>[
+                                const Text("数量: ",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold)),
+
+                                const SizedBox(width: 10),
+                                CartNum(_productContent)
+                              ],
+                            ),
+                          ),
+                        )
+
                       ],
                     ),
                   ),
