@@ -37,7 +37,6 @@ class _ProductContentFirstState extends State<ProductContentFirst>
 
   var cartProvider;
 
-
   @override
   void initState() {
     super.initState();
@@ -95,7 +94,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     actionEventBus.cancel();
   }
@@ -170,7 +169,11 @@ class _ProductContentFirstState extends State<ProductContentFirst>
             _changeAttr(attrItem.cate, item["title"], setBottomState);
           },
           child: Chip(
-            label: Text("${item["title"]}"),
+            label: Text(
+              "${item["title"]}",
+              style: TextStyle(
+                  color: item["checked"] ? Colors.white : Colors.black54),
+            ),
             padding: const EdgeInsets.all(10),
             backgroundColor: item["checked"] ? Colors.red : Colors.black26,
           ),
@@ -234,16 +237,14 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                             child: Row(
                               children: <Widget>[
                                 const Text("数量: ",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold)),
-
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
                                 const SizedBox(width: 10),
                                 CartNum(_productContent)
                               ],
                             ),
                           ),
                         )
-
                       ],
                     ),
                   ),
