@@ -16,6 +16,7 @@ import '../widget/LoadingWidget.dart';
 import '../services/event_bus.dart';
 import '../services/cart_services.dart';
 import '../provider/cart.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProductContentPage extends StatefulWidget {
   final Map arguments;

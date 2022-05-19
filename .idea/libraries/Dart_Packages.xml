@@ -128,10 +128,17 @@
             </list>
           </value>
         </entry>
+        <entry key="fluttertoast">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/fluttertoast-8.0.9/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="http_parser">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/http_parser-4.0.0/lib" />
+              <option value="$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/http_parser-4.0.1/lib" />
             </list>
           </value>
         </entry>
@@ -362,7 +369,7 @@
         <entry key="webview_flutter_platform_interface">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_platform_interface-1.8.1/lib" />
+              <option value="$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_platform_interface-1.9.0/lib" />
             </list>
           </value>
         </entry>
@@ -405,7 +412,8 @@
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_lints-1.0.4/lib" />
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_screenutil-5.0.0+2/lib" />
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_swiper_null_safety-1.0.2/lib" />
-      <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/http_parser-4.0.0/lib" />
+      <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/fluttertoast-8.0.9/lib" />
+      <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/http_parser-4.0.1/lib" />
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/js-0.6.3/lib" />
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/lints-1.0.1/lib" />
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/matcher-0.12.11/lib" />
@@ -437,7 +445,7 @@
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/vector_math-2.1.1/lib" />
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter-3.0.4/lib" />
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_android-2.8.8/lib" />
-      <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_platform_interface-1.8.1/lib" />
+      <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_platform_interface-1.9.0/lib" />
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_wkwebview-2.7.5/lib" />
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/win32-2.5.2/lib" />
       <root url="file://$PROJECT_DIR$/../Desktop/work/flutterDev/flutter/.pub-cache/hosted/pub.flutter-io.cn/xdg_directories-0.2.0+1/lib" />
