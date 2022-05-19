@@ -7,9 +7,11 @@ class Cart with ChangeNotifier {
   bool _isCheckedAll = false; //全选
   double _allPrice = 0; //总价
 
+  //get方法
   List get cartList => _cartList;
-
   bool get isCheckedAll => _isCheckedAll;
+  double get allPrice => _allPrice;
+
 
   Cart() {
     init();
@@ -27,6 +29,7 @@ class Cart with ChangeNotifier {
     }
     //获取全选的状态
     _isCheckedAll = isCheckAll();
+    computeAllPrice();
     notifyListeners();
   }
 
@@ -38,6 +41,8 @@ class Cart with ChangeNotifier {
   //数量改变触发的方法
   itemCountChange() {
     Storage.setString("cartList", json.encode(_cartList));
+
+    computeAllPrice();
     notifyListeners();
   }
 
@@ -47,6 +52,8 @@ class Cart with ChangeNotifier {
       _cartList[i]["checked"] = value;
     }
     _isCheckedAll = value;
+
+    computeAllPrice();
     Storage.setString("cartList", json.encode(_cartList));
     notifyListeners();
   }
@@ -71,6 +78,8 @@ class Cart with ChangeNotifier {
     } else {
       _isCheckedAll = false;
     }
+
+    computeAllPrice();
 
     Storage.setString("cartList", json.encode(_cartList));
     notifyListeners();
