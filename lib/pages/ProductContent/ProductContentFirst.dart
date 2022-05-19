@@ -205,7 +205,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
   _attrBottomSheet() {
     showModalBottomSheet(
         context: context,
-        builder: (contex) {
+        builder: (context) {
           return StatefulBuilder(
             builder: (BuildContext context, setBottomState) {
               return Stack(

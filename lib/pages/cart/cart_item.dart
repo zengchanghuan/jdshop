@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../provider/cart.dart';
 import '../../services/ScreenAdapter.dart';
 import './cart_num.dart';
+
 class CartItem extends StatefulWidget {
   const CartItem({Key? key}) : super(key: key);
 
@@ -41,15 +40,14 @@ class _CartItemState extends State<CartItem> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text("菲特旋转盖轻量杯不锈钢保温杯学生杯商务杯情侣杯保冷杯子便携水杯LHC4131WB(450Ml)白蓝",
+                  const Text(
+                      "菲特旋转盖轻量杯不锈钢保温杯学生杯商务杯情侣杯保冷杯子便携水杯LHC4131WB(450Ml)白蓝",
                       maxLines: 2),
                   Stack(
                     children: const <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Text("￥12",style: TextStyle(
-                            color: Colors.red
-                        )),
+                        child: Text("￥12", style: TextStyle(color: Colors.red)),
                       ),
                       Align(
                         alignment: Alignment.centerRight,
@@ -64,6 +62,5 @@ class _CartItemState extends State<CartItem> {
         ],
       ),
     );
-
   }
 }
