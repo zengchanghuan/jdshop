@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 
 class UserPage extends StatefulWidget {
-  UserPage({Key? key}) : super(key: key);
+  const UserPage({Key? key}) : super(key: key);
 
+  @override
   _UserPageState createState() => _UserPageState();
 }
 
 class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
-    return Text("我是用户组件");
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("用户中心"),
+      ),
+      body: const Center(
+        child: Text("用户中心"),
+      ),
+    );
   }
 }

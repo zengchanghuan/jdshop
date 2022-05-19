@@ -77,10 +77,9 @@ class _CartPageState extends State<CartPage> {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: RaisedButton(
-                      child: Text("结算",
+                    child: ElevatedButton(
+                      child: const Text("结算",
                           style: TextStyle(color: Colors.white)),
-                      color: Colors.red,
                       onPressed: () {},
                     ),
                   )
