@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:jdshop/services/cart_services.dart';
+import 'package:provider/provider.dart';
 import '../../services/ScreenAdapter.dart';
 import '../../widget/JdButton.dart';
 
@@ -296,6 +297,8 @@ class _ProductContentFirstState extends State<ProductContentFirst>
 
   @override
   Widget build(BuildContext context) {
+    cartProvider = Provider.of<Cart>(context);
+
     //处理图片
     super.build(context);
     String pic = Config.domain + _productContent.pic;
