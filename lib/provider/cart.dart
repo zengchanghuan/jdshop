@@ -4,8 +4,10 @@ import '../services/Storage.dart';
 
 class Cart with ChangeNotifier {
   List _cartList = []; //状态
-
+  bool _isCheckedAll = false; //状态
   List get cartList => _cartList;
+
+  bool get isCheckedAll => _isCheckedAll;
 
   Cart() {
     init();
@@ -21,10 +23,54 @@ class Cart with ChangeNotifier {
     } else {
       _cartList = [];
     }
+    //获取全选的状态
+    _isCheckedAll = isCheckAll();
     notifyListeners();
   }
 
+  //更新购物车列表
   updateCartList() {
     init();
+  }
+
+  //数量改变触发的方法
+  itemCountChange() {
+    Storage.setString("cartList", json.encode(_cartList));
+    notifyListeners();
+  }
+
+  //全选 反选
+  checkAll(value) {
+    for (var i = 0; i < _cartList.length; i++) {
+      _cartList[i]["checked"] = value;
+    }
+    _isCheckedAll = value;
+    Storage.setString("cartList", json.encode(_cartList));
+    notifyListeners();
+  }
+
+  //判断是否全选
+  bool isCheckAll() {
+    if (_cartList.isNotEmpty) {
+      for (var i = 0; i < _cartList.length; i++) {
+        if (_cartList[i]["checked"] == false) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+  //监听每一项的选中事件
+  itemChange() {
+    if (isCheckAll() == true) {
+      _isCheckedAll = true;
+    } else {
+      _isCheckedAll = false;
+    }
+
+    Storage.setString("cartList", json.encode(_cartList));
+    notifyListeners();
   }
 }
