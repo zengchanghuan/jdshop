@@ -3,8 +3,10 @@ import 'dart:convert';
 import '../services/Storage.dart';
 
 class Cart with ChangeNotifier {
-  List _cartList = []; //状态
-  bool _isCheckedAll = false; //状态
+  List _cartList = []; //购物车数据
+  bool _isCheckedAll = false; //全选
+  double _allPrice = 0; //总价
+
   List get cartList => _cartList;
 
   bool get isCheckedAll => _isCheckedAll;
@@ -70,6 +72,42 @@ class Cart with ChangeNotifier {
       _isCheckedAll = false;
     }
 
+    Storage.setString("cartList", json.encode(_cartList));
+    notifyListeners();
+  }
+
+  //计算总价
+  computeAllPrice() {
+    double tempAllPrice = 0;
+    for (var i = 0; i < _cartList.length; i++) {
+      if (_cartList[i]["checked"] == true) {
+        tempAllPrice += _cartList[i]["price"] * _cartList[i]["count"];
+      }
+    }
+    _allPrice = tempAllPrice;
+    notifyListeners();
+  }
+
+  //删除数据
+  removeItem() {
+    //  1        2
+    // ['1111','2222','333333333','4444444444']
+    // 错误的写法
+    // for (var i = 0; i < this._cartList.length; i++) {
+    //   if (this._cartList[i]["checked"] == true) {
+    //      this._cartList.removeAt(i);
+    //   }
+    // }
+
+    List tempList = [];
+    for (var i = 0; i < _cartList.length; i++) {
+      if (_cartList[i]["checked"] == false) {
+        tempList.add(_cartList[i]);
+      }
+    }
+    _cartList = tempList;
+    //计算总价
+    computeAllPrice();
     Storage.setString("cartList", json.encode(_cartList));
     notifyListeners();
   }
