@@ -15,7 +15,7 @@ class CartItem extends StatefulWidget {
 
 class _CartItemState extends State<CartItem> {
   late Map _itemData;
-  
+
   @override
   Widget build(BuildContext context) {
     _itemData = widget._itemData;
