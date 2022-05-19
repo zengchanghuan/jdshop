@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../services/ScreenAdapter.dart';
 import 'ProductContent/ProductContentFirst.dart';
@@ -11,6 +12,7 @@ import 'package:dio/dio.dart';
 import '../model/ProductContentModel.dart';
 
 import '../widget/LoadingWidget.dart';
+import '../services/event_bus.dart';
 
 class ProductContentPage extends StatefulWidget {
   final Map arguments;
@@ -159,7 +161,11 @@ class _ProductContentPageState extends State<ProductContentPage> {
                         color:const Color.fromRGBO(253, 1, 0, 0.9),
                         text: "加入购物车",
                         cb: (){
-                          print('加入购物车');
+                          //广播
+                          eventBus.fire(ProductContentEvent('加入购物车'));
+                          if (kDebugMode) {
+                            print('加入购物车');
+                          }
                         },
                       ),
                     ),
@@ -169,7 +175,11 @@ class _ProductContentPageState extends State<ProductContentPage> {
                         color: const Color.fromRGBO(255, 165, 0, 0.9),
                         text: "立即购买",
                         cb: (){
-                          print('立即购买');
+                          //广播
+                          eventBus.fire(ProductContentEvent('立即购买'));
+                          if (kDebugMode) {
+                            print('立即购买');
+                          }
                         },
                       ),
                     )
