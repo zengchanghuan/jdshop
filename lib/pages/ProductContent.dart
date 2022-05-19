@@ -139,12 +139,12 @@ class _ProductContentPageState extends State<ProductContentPage> {
                       child: Row(
                         children: <Widget>[
                           InkWell(
-                            onTap: (){
+                            onTap: () {
                               Navigator.pushNamed(context, '/cart');
                             },
                             child: Container(
-                              padding:
-                                  EdgeInsets.only(top: ScreenAdapter.height(10)),
+                              padding: EdgeInsets.only(
+                                  top: ScreenAdapter.height(10)),
                               width: 100,
                               height: ScreenAdapter.height(88),
                               child: Column(
@@ -170,9 +170,15 @@ class _ProductContentPageState extends State<ProductContentPage> {
                                 if (_productContentList[0].attr.length > 0) {
                                   eventBus.fire(ProductContentEvent('加入购物车'));
                                 } else {
-                                  await CartServices.addCart(_productContentList[0]);
+                                  await CartServices.addCart(
+                                      _productContentList[0]);
                                   //调用Provider 更新数据
                                   cartProvider.updateCartList();
+                                  Fluttertoast.showToast(
+                                    msg: '加入购物车成功',
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                  );
                                   if (kDebugMode) {
                                     print('加入购物车');
                                   }
