@@ -47,9 +47,9 @@ class _CartItemState extends State<CartItem> {
             flex: 1,
             child: Container(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
-              child: ListView(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                // crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text("${_itemData["title"]}", maxLines: 2),
                   Text("${_itemData["selectedAttr"]}", maxLines: 2),
