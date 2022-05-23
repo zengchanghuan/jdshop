@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../services/ScreenAdapter.dart';
 import '../widget/JdText.dart';
 import '../widget/JdButton.dart';
+import '../config/Config.dart';
+import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 class RegisterFirstPage extends StatefulWidget {
   const RegisterFirstPage({Key? key}) : super(key: key);
 
@@ -11,8 +15,49 @@ class RegisterFirstPage extends StatefulWidget {
 }
 
 class _RegisterFirstPageState extends State<RegisterFirstPage> {
+
+  late String tel;
+
+  sendCode() async {
+    if(kDebugMode){
+      print(tel);
+    }
+    RegExp reg = RegExp(r"^1\d{10}$");
+    if (reg.hasMatch(tel)) {
+      var api = '${Config.domain}api/sendCode';
+      var response = await Dio().post(api, data: {"tel": tel});
+      if (response.data["success"]) {
+
+        if (kDebugMode) {
+
+          print(response);
+        }  //演示期间服务器直接返回  给手机发送的验证码
+
+        Navigator.pushNamed(context, '/registerSecond',arguments: {
+          "tel":tel
+        });
+
+      } else {
+        Fluttertoast.showToast(
+          msg: '${response.data["message"]}',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+        );
+      }
+    } else {
+      Fluttertoast.showToast(
+        msg: '手机号格式不对',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("用户注册-第一步"),
@@ -25,9 +70,7 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
             JdText(
               text: "请输入手机号",
               onChanged: (value) {
-                if (kDebugMode) {
-                  print(value);
-                }
+                tel = value;
               },
             ),
             const SizedBox(height: 20),
@@ -36,7 +79,8 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
               color: Colors.red,
               height: 74,
               cb: () {
-                Navigator.pushNamed(context, '/registerSecond');
+                sendCode();
+                // Navigator.pushNamed(context, '/registerSecond');
               },
             )
           ],
