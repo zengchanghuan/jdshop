@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../services/ScreenAdapter.dart';
 import '../widget/JdButton.dart';
@@ -14,7 +15,7 @@ class _RegisterThirdPageState extends State<RegisterThirdPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("用户注册-第三步"),
+        title: const Text("用户注册-第三步"),
       ),
       body: Container(
         padding: EdgeInsets.all(ScreenAdapter.width(20)),
@@ -25,7 +26,9 @@ class _RegisterThirdPageState extends State<RegisterThirdPage> {
               text: "请输入密码",
               password: true,
               onChanged: (value) {
-                print(value);
+                if (kDebugMode) {
+                  print(value);
+                }
               },
             ),
             const SizedBox(height: 10),
@@ -33,7 +36,9 @@ class _RegisterThirdPageState extends State<RegisterThirdPage> {
               text: "请输入确认密码",
               password: true,
               onChanged: (value) {
-                print(value);
+                if (kDebugMode) {
+                  print(value);
+                }
               },
             ),
             const SizedBox(height: 20),

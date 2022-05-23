@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../services/ScreenAdapter.dart';
 import '../widget/JdText.dart';
@@ -24,7 +25,9 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
             JdText(
               text: "请输入手机号",
               onChanged: (value) {
-                print(value);
+                if (kDebugMode) {
+                  print(value);
+                }
               },
             ),
             const SizedBox(height: 20),

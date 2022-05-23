@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:jdshop/services/ScreenAdapter.dart';
 import 'package:jdshop/widget/JdButton.dart';
 import '../widget/JdText.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -15,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -23,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
         // title: Text("登录页面"),
         actions: <Widget>[
           TextButton(
-            child: Text("客服"),
+            child: const Text("客服"),
             onPressed: () {},
           )
         ],
@@ -37,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
                 margin: const EdgeInsets.only(top: 30),
                 height: ScreenAdapter.width(160),
                 width: ScreenAdapter.width(160),
-                child: Image.asset('images/login.png',fit: BoxFit.cover),
+                child: Image.asset('images/login.png', fit: BoxFit.cover),
                 // child: Image.network(
                 //     'https://www.itying.com/images/flutter/list5.jpg',
                 //     fit: BoxFit.cover),
@@ -47,7 +49,9 @@ class _LoginPageState extends State<LoginPage> {
             JdText(
               text: "请输入用户名",
               onChanged: (value) {
-                print(value);
+                if (kDebugMode) {
+                  print(value);
+                }
               },
             ),
             const SizedBox(height: 10),
@@ -55,12 +59,12 @@ class _LoginPageState extends State<LoginPage> {
               text: "请输入密码",
               password: true,
               onChanged: (value) {
-                print(value);
+                if (kDebugMode) {
+                  print(value);
+                }
               },
             ),
-
             const SizedBox(height: 10),
-
             Container(
               padding: EdgeInsets.all(ScreenAdapter.width(20)),
               child: Stack(
@@ -72,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: InkWell(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pushNamed(context, '/registerFirst');
                       },
                       child: const Text('新用户注册'),
@@ -81,15 +85,12 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-
             const SizedBox(height: 20),
             JdButton(
-              text:"登录",
+              text: "登录",
               color: Colors.red,
               height: 74,
-              cb: (){
-
-              },
+              cb: () {},
             )
           ],
         ),

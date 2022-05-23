@@ -21,7 +21,7 @@ class JdText extends StatelessWidget {
                 borderSide: BorderSide.none)),
         onChanged: onChanged,
       ),
-      height: ScreenAdapter.height(68),
+      height: ScreenAdapter.height(90),
       decoration: const BoxDecoration(
           border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),
     );

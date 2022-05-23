@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../services/ScreenAdapter.dart';
 import '../widget/JdText.dart';
@@ -32,7 +33,9 @@ class _RegisterSecondPageState extends State<RegisterSecondPage> {
                 JdText(
                   text: "请输入验证码",
                   onChanged: (value) {
-                    print(value);
+                    if (kDebugMode) {
+                      print(value);
+                    }
                   },
                 ),
                 Positioned(
