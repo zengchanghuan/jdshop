@@ -10,9 +10,9 @@ import '../widget/JdButton.dart';
 import '../config/Config.dart';
 
 class RegisterSecondPage extends StatefulWidget {
-  Map arguments;
+  final Map arguments;
 
-  RegisterSecondPage({Key? key, required this.arguments}) : super(key: key);
+  const RegisterSecondPage({Key? key, required this.arguments}) : super(key: key);
 
   @override
   State<RegisterSecondPage> createState() => _RegisterSecondPageState();
@@ -111,7 +111,7 @@ class _RegisterSecondPageState extends State<RegisterSecondPage> {
                 Positioned(
                   right: 0,
                   top: 0,
-                  child: sendCodeBtn?RaisedButton(
+                  child: sendCodeBtn?ElevatedButton(
                     child: const Text('重新发送'),
                     onPressed: sendCode,
                   ):ElevatedButton(
