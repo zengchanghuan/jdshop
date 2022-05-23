@@ -6,14 +6,15 @@ class JdButton extends StatelessWidget {
   final Color color;
   final String text; 
   final Function()? cb;  //注意：新版Flutter中需要把cb定义成Function()类型或者var类型
-  JdButton({Key? key,this.color=Colors.black,this.text="按钮",this.cb=null}) : super(key: key);
+  final double height;
+  const JdButton({Key? key,this.color=Colors.black,this.text="按钮",this.cb, this.height = 68}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {   
     return InkWell(
-      onTap: this.cb,
+      onTap: cb,
       child: Container(
-        margin: EdgeInsets.all(ScreenAdapter.height(10)),
+        margin: const EdgeInsets.all(10),
         padding: EdgeInsets.all(ScreenAdapter.height(10)),
         height: ScreenAdapter.height(68),
         width: double.infinity,
@@ -22,8 +23,8 @@ class JdButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10)),
         child: Center(
           child: Text(
-            "${text}",
-            style: TextStyle(color: Colors.white),
+            text,
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ),

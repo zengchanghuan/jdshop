@@ -6,7 +6,6 @@ import 'package:dio/dio.dart';
 import '../model/ProductModel.dart';
 import '../widget/LoadingWidget.dart';
 
-@immutable
 class ProductListPage extends StatefulWidget {
   Map arguments;
 
@@ -161,7 +160,7 @@ class _ProductListPageState extends State<ProductListPage> {
   Widget _productListWidget() {
     if (_productList.isNotEmpty) {
       return Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         margin: EdgeInsets.only(top: ScreenAdapter.height(80)),
         child: ListView.builder(
           controller: _scrollController,
@@ -177,7 +176,7 @@ class _ProductListPageState extends State<ProductListPage> {
                     SizedBox(
                       width: ScreenAdapter.width(180),
                       height: ScreenAdapter.height(180),
-                      child: Image.network("$pic", fit: BoxFit.cover),
+                      child: Image.network(pic, fit: BoxFit.cover),
                     ),
                     Expanded(
                       flex: 1,
@@ -393,6 +392,6 @@ class _ProductListPageState extends State<ProductListPage> {
                   _subHeaderWidget(),
                 ],
               )
-            : Center(child: const Text("没有您要浏览的数据")));
+            : const Center(child: Text("没有您要浏览的数据")));
   }
 }

@@ -4,11 +4,19 @@ import '../pages/Search.dart';
 import '../pages/ProductList.dart';
 import '../pages/ProductContent.dart';
 import '../pages/tabs/cart.dart';
+import '../pages/login.dart';
+import '../pages/register_first.dart';
+import '../pages/register_second.dart';
+import '../pages/register_third.dart';
 //配置路由
 final Map<String,Function> routes = {
   '/': (context) => const Tabs(),
-  '/search': (context) => SearchPage(),
+  '/search': (context) => const SearchPage(),
   '/cart': (context) => const CartPage(),
+  '/login': (context) => const LoginPage(),
+  '/registerFirst': (context) => const RegisterFirstPage(),
+  '/registerSecond': (context) => const RegisterSecondPage(),
+  '/registerThird': (context) => const RegisterThirdPage(),
   '/productList': (context,{arguments}) => ProductListPage(arguments:arguments),
   '/productContent': (context,{arguments}) => ProductContentPage(arguments:arguments),
 };
