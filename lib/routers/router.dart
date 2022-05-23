@@ -16,7 +16,7 @@ final Map<String,Function> routes = {
   '/login': (context) => const LoginPage(),
   '/registerFirst': (context) => const RegisterFirstPage(),
   '/registerSecond': (context,{arguments}) => RegisterSecondPage(arguments:arguments),
-  '/registerThird': (context) => const RegisterThirdPage(),
+  '/registerThird': (context,{arguments}) => RegisterThirdPage(arguments:arguments),
   '/productList': (context,{arguments}) => ProductListPage(arguments:arguments),
   '/productContent': (context,{arguments}) => ProductContentPage(arguments:arguments),
 };

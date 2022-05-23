@@ -71,7 +71,11 @@ class _RegisterSecondPageState extends State<RegisterSecondPage> {
     var response =
         await Dio().post(api, data: {"tel": tel, "code": code});
     if (response.data["success"]) {
-      Navigator.pushNamed(context, '/registerThird');
+      Navigator.pushNamed(context, '/registerThird',arguments: {
+        "tel":tel,
+        "code":code
+      });
+
     } else {
       Fluttertoast.showToast(
         msg: '${response.data["message"]}',
