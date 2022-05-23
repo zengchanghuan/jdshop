@@ -60,7 +60,7 @@ class _RegisterThirdPageState extends State<RegisterThirdPage> {
         //返回到根
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => const Tabs()),
-        (route) => route == null);
+            (route) => route == null);
       } else {
         Fluttertoast.showToast(
           msg: '${response.data["message"]}',

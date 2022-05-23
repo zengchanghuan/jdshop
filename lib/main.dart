@@ -5,7 +5,7 @@ import 'provider/counter.dart';
 import 'package:provider/provider.dart';
 import 'provider/cart.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: '/login',
+            initialRoute: '/',
             onGenerateRoute: onGenerateRoute,
             theme: ThemeData(
               // primaryColor: Colors.yellow
