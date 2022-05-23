@@ -40,7 +40,7 @@ class _RegisterSecondPageState extends State<RegisterSecondPage> {
                 ),
                 Positioned(
                   right: 0,
-                  top: 0,
+                  bottom: 5,
                   child: ElevatedButton(
                     child: const Text('重新发送'),
                     onPressed: () {},
