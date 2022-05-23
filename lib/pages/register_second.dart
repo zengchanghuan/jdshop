@@ -19,7 +19,7 @@ class RegisterSecondPage extends StatefulWidget {
 }
 
 class _RegisterSecondPageState extends State<RegisterSecondPage> {
-  late String tel;
+  late String tel = '';
   bool sendCodeBtn = false;
   int seconds = 10;
   late String code;
@@ -99,26 +99,27 @@ class _RegisterSecondPageState extends State<RegisterSecondPage> {
             const SizedBox(height: 40),
             Stack(
               children: <Widget>[
-                JdText(
-                  text: "请输入验证码",
-                  onChanged: (value) {
-                    code = value;
-                    if (kDebugMode) {
-                      print(value);
-                    }
-                  },
+                SizedBox(
+                  child: JdText(
+                    text: "请输入验证码",
+                    onChanged: (value) {
+                      // print(value);
+                      code = value;
+                    },
+                  ),
+                  height: ScreenAdapter.height(100),
                 ),
                 Positioned(
                   right: 0,
                   top: 0,
-                  child: sendCodeBtn?ElevatedButton(
+                  child: sendCodeBtn
+                      ? ElevatedButton(
                     child: const Text('重新发送'),
                     onPressed: sendCode,
-                  ):ElevatedButton(
+                  )
+                      : ElevatedButton(
                     child: Text('$seconds秒后重发'),
-                    onPressed: (){
-
-                    },
+                    onPressed: () {},
                   ),
                 )
               ],
@@ -128,9 +129,7 @@ class _RegisterSecondPageState extends State<RegisterSecondPage> {
               text: "下一步",
               color: Colors.red,
               height: 74,
-              cb: () {
-                validateCode();
-              },
+              cb: validateCode,
             )
           ],
         ),
