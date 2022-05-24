@@ -9,6 +9,9 @@ import '../pages/register_first.dart';
 import '../pages/register_second.dart';
 import '../pages/register_third.dart';
 import '../pages/check_out.dart';
+import '../pages/address/address_add.dart';
+import '../pages/address/address_edit.dart';
+import '../pages/address/address_list.dart';
 
 //配置路由
 final Map<String,Function> routes = {
@@ -22,6 +25,9 @@ final Map<String,Function> routes = {
   '/productList': (context,{arguments}) => ProductListPage(arguments:arguments),
   '/productContent': (context,{arguments}) => ProductContentPage(arguments:arguments),
   '/checkOut': (context) => const CheckOutPage(),
+  '/addressAdd': (context) => const AddressAddPage(),
+  '/addressEdit': (context) => const AddressEditPage(),
+  '/addressList': (context) => const AddressListPage(),
 
 };
 
