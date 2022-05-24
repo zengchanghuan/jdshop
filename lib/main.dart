@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: '/',
+            initialRoute: '/checkOut',
             onGenerateRoute: onGenerateRoute,
             theme: ThemeData(
               // primaryColor: Colors.yellow

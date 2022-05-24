@@ -8,6 +8,8 @@ import '../pages/login.dart';
 import '../pages/register_first.dart';
 import '../pages/register_second.dart';
 import '../pages/register_third.dart';
+import '../pages/check_out.dart';
+
 //配置路由
 final Map<String,Function> routes = {
   '/': (context) => const Tabs(),
@@ -19,6 +21,8 @@ final Map<String,Function> routes = {
   '/registerThird': (context,{arguments}) => RegisterThirdPage(arguments:arguments),
   '/productList': (context,{arguments}) => ProductListPage(arguments:arguments),
   '/productContent': (context,{arguments}) => ProductContentPage(arguments:arguments),
+  '/checkOut': (context) => const CheckOutPage(),
+
 };
 
 //固定写法

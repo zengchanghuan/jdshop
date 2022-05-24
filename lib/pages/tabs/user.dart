@@ -1,8 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:jdshop/services/ScreenAdapter.dart';
+import 'package:jdshop/services/event_bus.dart';
 import '../../services/user_services.dart';
 import '../../services/user_services.dart';
 import '../../widget/JdButton.dart';
+import '../../services/event_bus.dart';
+
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
 
@@ -20,6 +24,14 @@ class _UserPageState extends State<UserPage> {
     // TODO: implement initState
     super.initState();
     _getUserinfo();
+
+    //监听登录页面改变的事件
+    eventBus.on<UserEvent>().listen((event) {
+      if (kDebugMode) {
+        print(event.str);
+      }
+      _getUserinfo();
+    });
 
   }
 
