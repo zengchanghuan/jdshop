@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jdshop/provider/check_out_provider.dart';
+import 'package:provider/provider.dart';
 import '../services/screen_adapter.dart';
 
 class CheckOutPage extends StatefulWidget {
@@ -9,35 +11,36 @@ class CheckOutPage extends StatefulWidget {
 }
 
 class _CheckOutPageState extends State<CheckOutPage> {
-  Widget _checkOutItem() {
+
+  Widget _checkOutItem(item) {
     return Row(
       children: <Widget>[
-        SizedBox(
+        Container(
           width: ScreenAdapter.width(160),
           child: Image.network(
-              "https://www.itying.com/images/flutter/list2.jpg",
+              "${item["pic"]}",
               fit: BoxFit.cover),
         ),
         Expanded(
             flex: 1,
             child: Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const Text("Flutter仿京东商城项目实战视频教程", maxLines: 2),
-                  const Text("白色,175", maxLines: 2),
+                  Text("${item["title"]}", maxLines: 2),
+                  Text("${item["selectedAttr"]}", maxLines: 2),
                   Stack(
-                    children: const <Widget>[
+                    children: <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
                         child:
-                            Text("￥111", style: TextStyle(color: Colors.red)),
+                        Text("￥${item["price"]}", style: TextStyle(color: Colors.red)),
                       ),
                       Align(
                         alignment: Alignment.centerRight,
-                        child: Text("x2"),
+                        child: Text("x${item["count"]}"),
                       )
                     ],
                   )
@@ -48,11 +51,13 @@ class _CheckOutPageState extends State<CheckOutPage> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
+    var checkOutProvider = Provider.of<CheckOutProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("结算"),
+        title: Text("结算"),
       ),
       body: Stack(
         children: <Widget>[
@@ -69,11 +74,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     //   ),
                     //   trailing: Icon(Icons.navigate_next),
                     // )
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
                     ListTile(
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const <Widget>[
+                        children: <Widget>[
                           Text("张三  15201681234"),
                           SizedBox(height: 10),
                           Text("北京市海淀区西二旗"),
@@ -81,31 +86,37 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       ),
                       trailing: Icon(Icons.navigate_next),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
+
+
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Container(
                 color: Colors.white,
                 padding: EdgeInsets.all(ScreenAdapter.width(20)),
                 child: Column(
-                  children: <Widget>[
-                    _checkOutItem(),
-                    const Divider(),
-                    _checkOutItem(),
-                    const Divider(),
-                    _checkOutItem()
-                  ],
+                    children: checkOutProvider.checkOutListData.map((value){
+
+                      return Column(
+                        children: <Widget>[
+                          _checkOutItem(value),
+                          Divider()
+                        ],
+                      );
+
+                    }).toList()
+
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Container(
                 color: Colors.white,
                 padding: EdgeInsets.all(ScreenAdapter.width(20)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const <Widget>[
+                  children: <Widget>[
                     Text("商品总金额:￥100"),
                     Divider(),
                     Text("立减:￥5"),
@@ -117,31 +128,39 @@ class _CheckOutPageState extends State<CheckOutPage> {
             ],
           ),
           Positioned(
-            bottom: 20,
+            bottom: 0,
             width: ScreenAdapter.width(750),
-            height: ScreenAdapter.height(120),
+            height: ScreenAdapter.height(100),
             child: Container(
-              padding: const EdgeInsets.all(16),
-              // margin: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(5),
               width: ScreenAdapter.width(750),
               height: ScreenAdapter.height(100),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
+
                   color: Colors.white,
-                  border:
-                      Border(top: BorderSide(width: 1, color: Colors.black26))),
+                  border: Border(
+                      top: BorderSide(
+                          width: 1,
+                          color: Colors.black26
+                      )
+                  )
+              ),
+
               child: Stack(
                 children: <Widget>[
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
                     child: Text("总价:￥140", style: TextStyle(color: Colors.red)),
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: ElevatedButton(
-                      child: const Text('立即下单',
-                          style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {},
+                    child: RaisedButton(
+                      child:
+                      Text('立即下单', style: TextStyle(color: Colors.white)),
+                      color: Colors.red,
+                      onPressed: (){
+
+                      },
                     ),
                   )
                 ],
@@ -151,5 +170,6 @@ class _CheckOutPageState extends State<CheckOutPage> {
         ],
       ),
     );
+
   }
 }
