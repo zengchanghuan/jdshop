@@ -12,7 +12,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   Widget _checkOutItem() {
     return Row(
       children: <Widget>[
-        Container(
+        SizedBox(
           width: ScreenAdapter.width(160),
           child: Image.network(
               "https://www.itying.com/images/flutter/list2.jpg",
@@ -119,9 +119,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
           Positioned(
             bottom: 20,
             width: ScreenAdapter.width(750),
-            height: ScreenAdapter.height(140),
+            height: ScreenAdapter.height(120),
             child: Container(
-              margin: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(16),
+              // margin: const EdgeInsets.all(10),
               width: ScreenAdapter.width(750),
               height: ScreenAdapter.height(100),
               decoration: const BoxDecoration(

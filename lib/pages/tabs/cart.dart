@@ -1,9 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../cart/cart_item.dart';
 import '../../services/ScreenAdapter.dart';
 import '../../provider/cart.dart';
+import '../../services/cart_services.dart';
+import '../../services/user_services.dart';
+import '../../provider/check_out_provider.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -15,6 +19,8 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   bool _isEdit = false;
 
+  dynamic checkOutProvider;
+
   @override
   void initState() {
     super.initState();
@@ -23,9 +29,39 @@ class _CartPageState extends State<CartPage> {
     }
   }
 
+  doCheckOut() async {
+    //1、获取购物车选中的数据
+    List checkOutData = await CartServices.getCheckOutData();
+    //2、保存购物车选中的数据
+    checkOutProvider.changeCheckOutListData(checkOutData);
+    //3、购物车有没有选中的数据
+    if (checkOutData.isNotEmpty) {
+      //4、判断用户有没有登录
+      var loginState = await UserServices.getUserLoginState();
+      if (loginState) {
+        Navigator.pushNamed(context, '/checkOut');
+      } else {
+        Fluttertoast.showToast(
+          msg: '您还没有登录，请登录以后再去结算',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+        );
+        Navigator.pushNamed(context, '/login');
+      }
+    } else {
+      Fluttertoast.showToast(
+        msg: '购物车没有选中的数据',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var cartProvider = Provider.of<Cart>(context);
+    checkOutProvider = Provider.of<CheckOut>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("购物车"),
@@ -102,7 +138,7 @@ class _CartPageState extends State<CartPage> {
                                   ),
                                   child: const Text("结算",
                                       style: TextStyle(color: Colors.white)),
-                                  onPressed: () {},
+                                  onPressed: doCheckOut,
                                 ),
                               )
                             : Align(

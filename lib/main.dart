@@ -4,6 +4,7 @@ import 'routers/router.dart';
 import 'provider/counter.dart';
 import 'package:provider/provider.dart';
 import 'provider/cart.dart';
+import 'provider/check_out_provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -24,10 +25,12 @@ class _MyAppState extends State<MyApp> {
           [
             ChangeNotifierProvider(create: (_) => CountNotifier()),
             ChangeNotifierProvider(create: (_) => Cart()),
+            ChangeNotifierProvider(create: (_) => CheckOut()),
+
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: '/checkOut',
+            initialRoute: '/',
             onGenerateRoute: onGenerateRoute,
             theme: ThemeData(
               // primaryColor: Colors.yellow
