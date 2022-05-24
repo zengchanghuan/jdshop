@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:jdshop/services/cart_services.dart';
 import 'package:provider/provider.dart';
-import '../../services/ScreenAdapter.dart';
+import '../../services/screen_adapter.dart';
 import '../../widget/JdButton.dart';
 
 import '../../model/ProductContentModel.dart';
@@ -11,7 +11,7 @@ import '../../model/ProductContentModel.dart';
 import '../../config/Config.dart';
 import '../../services/event_bus.dart';
 import '../ProductContent/cart_number.dart';
-import '../../provider/cart.dart';
+import '../../provider/cart_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ProductContentFirst extends StatefulWidget {
@@ -295,7 +295,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
 
   @override
   Widget build(BuildContext context) {
-    cartProvider = Provider.of<Cart>(context);
+    cartProvider = Provider.of<CartProvider>(context);
 
     //处理图片
     super.build(context);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'Home.dart';
+import 'home.dart';
 import 'Category.dart';
 import 'Cart.dart';
-import 'User.dart';
+import 'user.dart';
 
 class Tabs extends StatefulWidget {
   const Tabs({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../services/ScreenAdapter.dart';
+import '../services/screen_adapter.dart';
 import '../widget/JdText.dart';
 import '../widget/JdButton.dart';
 import '../config/Config.dart';

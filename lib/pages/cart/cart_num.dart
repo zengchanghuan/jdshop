@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jdshop/provider/cart.dart';
+import 'package:jdshop/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
-import '../../services/ScreenAdapter.dart';
+import '../../services/screen_adapter.dart';
 
 class CartNum extends StatefulWidget {
   final Map _itemData;
@@ -20,7 +20,7 @@ class _CartNumState extends State<CartNum> {
   Widget build(BuildContext context) {
     _itemData = widget._itemData;
 
-    cartProvider = Provider.of<Cart>(context);
+    cartProvider = Provider.of<CartProvider>(context);
 
     return Container(
       width: ScreenAdapter.width(164),

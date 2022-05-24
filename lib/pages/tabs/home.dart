@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //最新版本的flutter中使用flutter_swiper_null_safety替代flutter_swiper，他们的用法都是一样的。
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:dio/dio.dart';
-import '../../services/ScreenAdapter.dart';
+import '../../services/screen_adapter.dart';
 import '../../model/FocusModel.dart';
 import '../../model/ProductModel.dart';
 import '../../config/Config.dart';

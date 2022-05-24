@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../services/ScreenAdapter.dart';
+import '../services/screen_adapter.dart';
 import '../config/Config.dart';
 import 'package:dio/dio.dart';
 import '../model/ProductModel.dart';
-import '../widget/LoadingWidget.dart';
+import '../widget/loading_widget.dart';
 
 class ProductListPage extends StatefulWidget {
   Map arguments;

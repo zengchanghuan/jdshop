@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'Storage.dart';
+import 'storage.dart';
 
 class SearchServices {
   static setHistoryData(keywords) async {

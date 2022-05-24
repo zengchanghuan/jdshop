@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CheckOut with ChangeNotifier {
+class CheckOutProvider with ChangeNotifier {
   List _checkOutListData = []; //购物车数据
   List get checkOutListData => _checkOutListData;
 

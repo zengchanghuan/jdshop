@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/ScreenAdapter.dart';
+import '../services/screen_adapter.dart';
 
 class JdText extends StatelessWidget {
   final String text;

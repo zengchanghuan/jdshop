@@ -4,12 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../services/ScreenAdapter.dart';
+import '../services/screen_adapter.dart';
 import '../widget/JdButton.dart';
 import '../widget/JdText.dart';
 import '../config/Config.dart';
-import '../services/Storage.dart';
-import '../pages/tabs/Tabs.dart';
+import '../services/storage.dart';
+import '../pages/tabs/tabs.dart';
 
 class RegisterThirdPage extends StatefulWidget {
   final Map arguments;

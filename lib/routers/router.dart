@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../pages/tabs/Tabs.dart';
+import '../pages/tabs/tabs.dart';
 import '../pages/Search.dart';
-import '../pages/ProductList.dart';
-import '../pages/ProductContent.dart';
+import '../pages/product_list.dart';
+import '../pages/product_content.dart';
 import '../pages/tabs/cart.dart';
 import '../pages/login.dart';
 import '../pages/register_first.dart';

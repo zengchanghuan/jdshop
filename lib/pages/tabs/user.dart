@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:jdshop/services/ScreenAdapter.dart';
+import 'package:jdshop/services/screen_adapter.dart';
 import 'package:jdshop/services/event_bus.dart';
 import '../../services/user_services.dart';
 import '../../services/user_services.dart';

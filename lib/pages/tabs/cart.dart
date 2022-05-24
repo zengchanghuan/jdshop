@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../cart/cart_item.dart';
-import '../../services/ScreenAdapter.dart';
-import '../../provider/cart.dart';
+import '../../services/screen_adapter.dart';
+import '../../provider/cart_provider.dart';
 import '../../services/cart_services.dart';
 import '../../services/user_services.dart';
 import '../../provider/check_out_provider.dart';
@@ -59,8 +59,8 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    var cartProvider = Provider.of<Cart>(context);
-    checkOutProvider = Provider.of<CheckOut>(context);
+    var cartProvider = Provider.of<CartProvider>(context);
+    checkOutProvider = Provider.of<CheckOutProvider>(context);
 
     return Scaffold(
       appBar: AppBar(

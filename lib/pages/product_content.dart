@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../services/ScreenAdapter.dart';
-import 'ProductContent/ProductContentFirst.dart';
-import 'ProductContent/ProductContentSecond.dart';
-import 'ProductContent/ProductContentThird.dart';
+import '../services/screen_adapter.dart';
+import 'ProductContent/product_content_first.dart';
+import 'ProductContent/product_content_second.dart';
+import 'ProductContent/product_content_third.dart';
 
 import '../widget/JdButton.dart';
 
@@ -12,10 +12,10 @@ import '../config/Config.dart';
 import 'package:dio/dio.dart';
 import '../model/ProductContentModel.dart';
 
-import '../widget/LoadingWidget.dart';
+import '../widget/loading_widget.dart';
 import '../services/event_bus.dart';
 import '../services/cart_services.dart';
-import '../provider/cart.dart';
+import '../provider/cart_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ProductContentPage extends StatefulWidget {
@@ -57,7 +57,7 @@ class _ProductContentPageState extends State<ProductContentPage> {
 
   @override
   Widget build(BuildContext context) {
-    var cartProvider = Provider.of<Cart>(context);
+    var cartProvider = Provider.of<CartProvider>(context);
     return DefaultTabController(
       length: 3,
       child: Scaffold(

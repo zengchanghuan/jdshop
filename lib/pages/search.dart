@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../services/ScreenAdapter.dart';
-import '../services/SearchServices.dart';
+import '../services/screen_adapter.dart';
+import '../services/search_services.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import '../services/Storage.dart';
+import '../services/storage.dart';
 
-class Cart with ChangeNotifier {
+class CartProvider with ChangeNotifier {
   List _cartList = []; //购物车数据
   bool _isCheckedAll = false; //全选
   double _allPrice = 0; //总价
@@ -13,7 +13,7 @@ class Cart with ChangeNotifier {
   double get allPrice => _allPrice;
 
 
-  Cart() {
+  CartProvider() {
     init();
   }
 
