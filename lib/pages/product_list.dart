@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../services/screen_adapter.dart';
-import '../config/Config.dart';
+import '../config/config.dart';
 import 'package:dio/dio.dart';
-import '../model/ProductModel.dart';
+import '../model/product_model.dart';
 import '../widget/loading_widget.dart';
 
 class ProductListPage extends StatefulWidget {

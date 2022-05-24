@@ -5,9 +5,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../services/screen_adapter.dart';
-import '../widget/JdText.dart';
-import '../widget/JdButton.dart';
-import '../config/Config.dart';
+import '../widget/jd_text.dart';
+import '../widget/jd_button.dart';
+import '../config/config.dart';
 
 class RegisterSecondPage extends StatefulWidget {
   final Map arguments;

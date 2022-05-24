@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jdshop/services/screen_adapter.dart';
 import 'package:jdshop/services/event_bus.dart';
-import 'package:jdshop/widget/JdButton.dart';
-import '../widget/JdText.dart';
-import '../config/Config.dart';
+import 'package:jdshop/widget/jd_button.dart';
+import '../widget/jd_text.dart';
+import '../config/config.dart';
 import '../services/storage.dart';
 
 class LoginPage extends StatefulWidget {

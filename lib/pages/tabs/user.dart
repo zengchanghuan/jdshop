@@ -4,7 +4,7 @@ import 'package:jdshop/services/screen_adapter.dart';
 import 'package:jdshop/services/event_bus.dart';
 import '../../services/user_services.dart';
 import '../../services/user_services.dart';
-import '../../widget/JdButton.dart';
+import '../../widget/jd_button.dart';
 import '../../services/event_bus.dart';
 
 class UserPage extends StatefulWidget {

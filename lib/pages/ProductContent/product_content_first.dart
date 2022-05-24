@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:jdshop/services/cart_services.dart';
 import 'package:provider/provider.dart';
 import '../../services/screen_adapter.dart';
-import '../../widget/JdButton.dart';
+import '../../widget/jd_button.dart';
 
-import '../../model/ProductContentModel.dart';
+import '../../model/product_content_model.dart';
 
-import '../../config/Config.dart';
+import '../../config/config.dart';
 import '../../services/event_bus.dart';
 import '../ProductContent/cart_number.dart';
 import '../../provider/cart_provider.dart';

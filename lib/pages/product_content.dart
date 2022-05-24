@@ -6,11 +6,11 @@ import 'ProductContent/product_content_first.dart';
 import 'ProductContent/product_content_second.dart';
 import 'ProductContent/product_content_third.dart';
 
-import '../widget/JdButton.dart';
+import '../widget/jd_button.dart';
 
-import '../config/Config.dart';
+import '../config/config.dart';
 import 'package:dio/dio.dart';
-import '../model/ProductContentModel.dart';
+import '../model/product_content_model.dart';
 
 import '../widget/loading_widget.dart';
 import '../services/event_bus.dart';

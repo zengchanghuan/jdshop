@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../pages/tabs/tabs.dart';
-import '../pages/Search.dart';
+import '../pages/search.dart';
 import '../pages/product_list.dart';
 import '../pages/product_content.dart';
 import '../pages/tabs/cart.dart';

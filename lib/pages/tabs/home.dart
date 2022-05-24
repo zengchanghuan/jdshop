@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:dio/dio.dart';
 import '../../services/screen_adapter.dart';
-import '../../model/FocusModel.dart';
-import '../../model/ProductModel.dart';
-import '../../config/Config.dart';
+import '../../model/focus_model.dart';
+import '../../model/product_model.dart';
+import '../../config/config.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
