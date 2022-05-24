@@ -42,6 +42,8 @@ dependencies:
   webview_flutter: ^3.0.4
   fluttertoast: ^8.0.9
   city_pickers: ^1.0.1
+  crypto: ^3.0.2
+
 
 
 

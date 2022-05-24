@@ -1,5 +1,12 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../services/screen_adapter.dart';
+import '../../services/user_services.dart';
+import '../../services/sign_services.dart';
+import '../../config/config.dart';
+import '../../services/event_bus.dart';
+
 class AddressListPage extends StatefulWidget {
   const AddressListPage({Key? key}) : super(key: key);
 
@@ -8,6 +15,41 @@ class AddressListPage extends StatefulWidget {
 }
 
 class _AddressListPageState extends State<AddressListPage> {
+  List addressList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getAddressList();
+
+    eventBus.on().listen((event) {
+      if (kDebugMode) {
+        print(event.str);
+        _getAddressList();
+      }
+    });
+  }
+
+  _getAddressList() async {
+    //请求接口
+    List userinfo = await UserServices.getUserInfo();
+
+    var tempJson = {"uid": userinfo[0]['_id'], "salt": userinfo[0]["salt"]};
+
+    var sign = SignServices.getSign(tempJson);
+
+    var api =
+        '${Config.domain}api/addressList?uid=${userinfo[0]['_id']}&sign=$sign';
+
+    var response = await Dio().get(api);
+    // print(response.data["result"]);
+
+    setState(() {
+      addressList = response.data["result"];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,8 +128,8 @@ class _AddressListPageState extends State<AddressListPage> {
               height: ScreenAdapter.height(88),
               decoration: const BoxDecoration(
                   color: Colors.red,
-                  border: Border(
-                      top: BorderSide(width: 1, color: Colors.black26))),
+                  border:
+                      Border(top: BorderSide(width: 1, color: Colors.black26))),
               child: InkWell(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -96,16 +138,14 @@ class _AddressListPageState extends State<AddressListPage> {
                     Text("增加收货地址", style: TextStyle(color: Colors.white))
                   ],
                 ),
-                onTap: (){
-                  Navigator.pushNamed(context,'/addressAdd');
+                onTap: () {
+                  Navigator.pushNamed(context, '/addressAdd');
                 },
               ),
             ),
           )
         ],
       ),
-
     );
   }
 }
-
