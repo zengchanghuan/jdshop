@@ -152,7 +152,6 @@ class _ProductListPageState extends State<ProductListPage> {
       return (index == _productList.length - 1)
           ? const Text("--我是有底线的--")
           : const Text("");
-      ;
     }
   }
 

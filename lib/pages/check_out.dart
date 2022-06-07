@@ -14,14 +14,14 @@ class _CheckOutPageState extends State<CheckOutPage> {
   Widget _checkOutItem(item) {
     return Row(
       children: <Widget>[
-        Container(
+        SizedBox(
           width: ScreenAdapter.width(160),
           child: Image.network("${item["pic"]}", fit: BoxFit.cover),
         ),
         Expanded(
             flex: 1,
             child: Container(
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +33,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text("￥${item["price"]}",
-                            style: TextStyle(color: Colors.red)),
+                            style: const TextStyle(color: Colors.red)),
                       ),
                       Align(
                         alignment: Alignment.centerRight,
@@ -53,7 +53,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
     var checkOutProvider = Provider.of<CheckOutProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("结算"),
+        title: const Text("结算"),
       ),
       body: Stack(
         children: <Widget>[

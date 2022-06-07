@@ -5,16 +5,14 @@ class FocusModel {
   FocusModel.fromJson(Map<String, dynamic> json) {
     if (json['result'] != null) {      
       json['result'].forEach((v) {
-        result.add(new FocusItemModel.fromJson(v));
+        result.add(FocusItemModel.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.result != null) {
-      data['result'] = this.result.map((v) => v.toJson()).toList();
-    }
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['result'] = result.map((v) => v.toJson()).toList();
     return data;
   }
 }
@@ -36,12 +34,12 @@ class FocusItemModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['title'] = this.title;
-    data['status'] = this.status;
-    data['pic'] = this.pic;
-    data['url'] = this.url;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['title'] = title;
+    data['status'] = status;
+    data['pic'] = pic;
+    data['url'] = url;
     return data;
   }
 }

@@ -47,4 +47,5 @@ var onGenerateRoute = (RouteSettings settings) {
       return route;
     }
   }
+  return null;
 };

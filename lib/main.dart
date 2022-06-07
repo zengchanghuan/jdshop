@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'routers/router.dart';
-import 'provider/counter.dart';
 import 'package:provider/provider.dart';
 import 'provider/cart_provider.dart';
 import 'provider/check_out_provider.dart';

@@ -45,7 +45,7 @@ class _CategoryPageState extends State<CategoryPage>
 
   //右侧分类
   _getRightCateData(pid) async {
-    var api = '${Config.domain}api/pcate?pid=${pid}';
+    var api = '${Config.domain}api/pcate?pid=$pid';
     var result = await Dio().get(api);
     var rightCateList = CateModel.fromJson(result.data);
     // print(rightCateList.result);
