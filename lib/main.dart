@@ -18,24 +18,22 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-        designSize: const Size(750, 1624), //配置设计稿的宽度高度
-        builder: () => MultiProvider(
-          providers:
-          [
-            // ChangeNotifierProvider(create: (_) => CountNotifier()),
-            ChangeNotifierProvider(create: (_) => CartProvider()),
-            ChangeNotifierProvider(create: (_) => CheckOutProvider()),
+    return MultiProvider(
+        providers: [
+          // ChangeNotifierProvider(create: (_) => CountNotifier()),
+          ChangeNotifierProvider(create: (_) => CartProvider()),
+          ChangeNotifierProvider(create: (_) => CheckOutProvider()),
 
-          ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            initialRoute: '/',
-            onGenerateRoute: onGenerateRoute,
-            theme: ThemeData(
-              // primaryColor: Colors.yellow
-                primaryColor: Colors.white),
-          ),
-        ));
+        ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        onGenerateRoute: onGenerateRoute,
+        theme: ThemeData(
+          // primaryColor: Colors.yellow
+            primaryColor: Colors.white),
+      ),
+    );
+
   }
 }

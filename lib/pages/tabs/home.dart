@@ -6,6 +6,7 @@ import '../../services/screen_adapter.dart';
 import '../../model/focus_model.dart';
 import '../../model/product_model.dart';
 import '../../config/config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -227,6 +228,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,designSize: const Size(750,1624));
     super.build(context);
     return Scaffold(
       appBar: AppBar(
