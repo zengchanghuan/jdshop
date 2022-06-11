@@ -21,8 +21,9 @@ class _CartItemState extends State<CartItem> {
     _itemData = widget._itemData;
 
     var cartProvider = Provider.of<CartProvider>(context);
+    print('Checkbox itemData $_itemData');
     return Container(
-      height: ScreenAdapter.height(200),
+      height: ScreenAdapter.height(220),
       padding: const EdgeInsets.all(5),
       decoration: const BoxDecoration(
           border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),

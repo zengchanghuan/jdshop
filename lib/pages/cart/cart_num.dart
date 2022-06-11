@@ -23,7 +23,7 @@ class _CartNumState extends State<CartNum> {
     cartProvider = Provider.of<CartProvider>(context);
 
     return Container(
-      width: ScreenAdapter.width(180),
+      width: ScreenAdapter.width(170),
       decoration:
           BoxDecoration(border: Border.all(width: 1, color: Colors.black12)),
       child: Row(
