@@ -126,7 +126,7 @@ class _CategoryPageState extends State<CategoryPage>
                         child: Image.network(pic, fit: BoxFit.cover),
                       ),
                       SizedBox(
-                        height: ScreenAdapter.height(28),
+                        height: ScreenAdapter.height(36),
                         child: Text("${_rightCateList[index].title}"),
                       )
                     ],
