@@ -246,7 +246,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                   Positioned(
                     bottom: 0,
                     width: ScreenAdapter.width(750),
-                    height: ScreenAdapter.height(76),
+                    height: ScreenAdapter.height(120),
                     child: Row(
                       children: <Widget>[
                         Expanded(
@@ -254,7 +254,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                           child: Container(
                             margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                             child: JdButton(
-                              // color: const Color.fromRGBO(253, 1, 0, 0.9),
+                              color: const Color.fromRGBO(253, 1, 0, 0.9),
                               text: "加入购物车",
                               cb: () async {
                                 await CartServices.addCart(_productContent);

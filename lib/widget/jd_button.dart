@@ -7,7 +7,7 @@ class JdButton extends StatelessWidget {
   final String text; 
   final Function()? cb;  //注意：新版Flutter中需要把cb定义成Function()类型或者var类型
   final double height;
-  const JdButton({Key? key,this.color=Colors.black,this.text="按钮",this.cb, this.height = 68}) : super(key: key);
+  const JdButton({Key? key,this.color=Colors.black,this.text="按钮",this.cb, this.height = 80}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {   
