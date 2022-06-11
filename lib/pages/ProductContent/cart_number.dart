@@ -24,7 +24,7 @@ class _CartNumState extends State<CartNum> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenAdapter.width(164),
+      width: ScreenAdapter.width(180),
       decoration:
           BoxDecoration(border: Border.all(width: 1, color: Colors.black12)),
       child: Row(

@@ -19,7 +19,6 @@ class _AddressListPageState extends State<AddressListPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getAddressList();
 
