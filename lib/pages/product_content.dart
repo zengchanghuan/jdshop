@@ -151,7 +151,7 @@ class _ProductContentPageState extends State<ProductContentPage> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.shopping_cart,
-                                    size: ScreenAdapter.size(36),
+                                    size: ScreenAdapter.size(30),
                                   ),
                                   Text("购物车",
                                       style: TextStyle(
